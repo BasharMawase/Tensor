@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tensor | International Math Institute</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Layers -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <canvas id="canvas-overlay"></canvas>
+
+    <!-- Navigation -->
+    <header>
+        <div class="header-left">
+            <a href="#" class="logo">
+                <span class="logo-icon">∇</span> TENSOR
+            </a>
+            <div class="lang-switch">
+                <a href="index.html" class="lang-btn active">EN</a>
+                <a href="index_ar.html" class="lang-btn">AR</a>
+                <a href="index_he.html" class="lang-btn">HE</a>
+                <a href="index_ru.html" class="lang-btn">RU</a>
+                <button id="nav-auth-btn" class="lang-btn"
+                    style="margin-left: 20px; border-color: var(--gold-primary); color: var(--gold-primary);">Login /
+                    Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        <nav class="nav-links">
+            <a href="#about" class="nav-item">Institute</a>
+            <a href="#academics" class="nav-item">Math</a>
+            <a href="#languages" class="nav-item">Languages</a>
+            <a href="#programming" class="nav-item">Programming</a>
+            <a href="#ai-data-science" class="nav-item">AI & Data</a>
+            <a href="#contact" class="nav-item">Contact</a>
+            <a href="/admin" class="nav-item" id="nav-admin-link"
+                style="display: none; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 5px 10px; border-radius: 4px; margin-left: 10px;">Admin</a>
+
+            <!-- Mobile Only Elements -->
+            <div class="mobile-only-nav">
+                <div class="mobile-lang-switch">
+                    <a href="index.html" class="lang-btn active">EN</a>
+                    <a href="index_ar.html" class="lang-btn">AR</a>
+                    <a href="index_he.html" class="lang-btn">HE</a>
+                    <a href="index_ru.html" class="lang-btn">RU</a>
+                </div>
+                <button id="mobile-auth-btn" class="btn-gold" style="width: 100%; margin-top: 20px;">Login / Sign
+                    Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1>CONSTRUCTING<br>THE FUTURE MIND</h1>
+            <div class="hero-subtitle">International Math Institute</div>
+            <p>
+                A sanctuary for rigorous mathematical thought. Bridging pure abstraction with world-changing application
+                through our global campuses.
+            </p>
+            <a href="#academics" class="btn-primary">Explore Programs</a>
+        </div>
+    </section>
+
+    <!-- About Us / Institute Section -->
+    <section id="about">
+        <div class="about-split">
+            <div class="about-text reveal-left">
+                <h3>Our Institute</h3>
+                <p>Located at the intersection of mathematical philosophy and practical engineering, Tensor Academy
+                    provides an unparalleled environment for intellectual growth.</p>
+                <p>With branches in the world's most vibrant scientific hubs, we offer both on-campus intensity and the
+                    flexibility of virtual fellowships.</p>
+            </div>
+            <div class="about-image reveal-right">
+                <img src="IMG_1852.JPG" alt="Institute Library">
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Institute Section -->
+    <section id="about">
+        <div class="section-title reveal">
+            <h2>The Tensor Philosophy</h2>
+            <p>Mathematics is the universal language of the universe. We nurture the minds that speak it fluently.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>Global Vision</h3>
+                <p>With campuses in 4 continents, we bring together the brightest minds from diverse cultures, united by
+                    the pursuit of mathematical truth.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Interdisciplinary</h3>
+                <p>We believe in the intersection of disciplines. Our curriculum integrates physics, computer science,
+                    and finance with pure math.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics">
+        <div class="section-title reveal">
+            <h2>Academic Divisions</h2>
+            <p>From foundational theory to complex system modeling.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>Pure Mathematics</h3>
+                <p>Algebra, Analysis, Topology, and Number Theory. The pursuit of beauty and logic in its purest form.
+                </p>
+            </div>
+            <div class="glass-card">
+                <h3>Applied Mathematics</h3>
+                <p>Differential Equations, Optimization, and Fluid Dynamics. Solving the real-world problems of
+                    tomorrow.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Computational Science</h3>
+                <p>Where code meets calculus. Algorithm design, cryptography, and artificial intelligence foundations.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    </section>
+
+    </section>
+
+    <!-- Math Courses Section -->
+    <section id="courses">
+        <div class="section-title reveal">
+            <h2>Core Curriculum</h2>
+            <p>A rigorous journey through the foundations of modern mathematics.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-101&lang=en'">
+                <span class="course-number">MTH-101</span>
+                <h3>Calculus & Analysis</h3>
+                <p>Master the mathematics of change. From limits and derivatives to multivariable integration and vector
+                    fields.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Essential</span>
+                    <span class="course-tag">12 Weeks</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-102&lang=en'">
+                <span class="course-number">MTH-102</span>
+                <h3>Linear Algebra</h3>
+                <p>The study of vector spaces and linear mappings. The backbone of modern physics and data science.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Foundational</span>
+                    <span class="course-tag">10 Weeks</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-201&lang=en'">
+                <span class="course-number">MTH-201</span>
+                <h3>Abstract Algebra</h3>
+                <p>Explore algebraic structures such as groups, rings, and fields. The language of symmetry.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Advanced</span>
+                    <span class="course-tag">14 Weeks</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-202&lang=en'">
+                <span class="course-number">MTH-202</span>
+                <h3>Partial Diff. Equations</h3>
+                <p>Model physical phenomena including heat, sound, and fluid dynamics using differential equations.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Applied</span>
+                    <span class="course-tag">12 Weeks</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-103&lang=en'">
+                <span class="course-number">MTH-103</span>
+                <h3>Discrete Mathematics</h3>
+                <p>Graph theory, combinatorics, and the foundations of computer science logic. Essential for algorithms.
+                </p>
+                <div class="course-tags">
+                    <span class="course-tag">Essential</span>
+                    <span class="course-tag">10 Weeks</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-104&lang=en'">
+                <span class="course-number">MTH-104</span>
+                <h3>Probability Theory</h3>
+                <p>Quantifying uncertainty. Random variables, distributions, and limit theorems. The math of chance.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Foundational</span>
+                    <span class="course-tag">12 Weeks</span>
+                </div>
+            </div>
+            <div class="levels-banner">
+                <p>Tensor Academy supports students of <strong>all levels</strong> — from ambitious <strong>school
+                        students</strong> to advanced researchers.</p>
+            </div>
+    </section>
+
+    <!-- Scientific Languages Section -->
+    <section id="languages" class="scientific-languages">
+        <div class="section-title reveal">
+            <h2>Scientific Languages</h2>
+            <p>Mastering the primary languages of international research and journals.</p>
+        </div>
+
+        <div class="lang-learning-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-EN&lang=en'">
+                <span class="lang-icon">EN</span>
+                <h4>English</h4>
+                <span class="lang-level">Scientific & Academic</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-HE&lang=en'">
+                <span class="lang-icon">HE</span>
+                <h4>Hebrew</h4>
+                <span class="lang-level">Beginner to Advanced</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-RU&lang=en'">
+                <span class="lang-icon">RU</span>
+                <h4>Russian</h4>
+                <span class="lang-level">Technical & Literary</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-AR&lang=en'">
+                <span class="lang-icon">AR</span>
+                <h4>Arabic</h4>
+                <span class="lang-level">Modern Standard</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Languages Section -->
+    <section id="programming" class="courses-section">
+        <div class="section-title reveal">
+            <h2>Programming Languages</h2>
+            <p>Core engineering languages for software and system development.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-PY&lang=en'">
+                <span class="lang-icon">PY</span>
+                <h4>Python</h4>
+                <span class="lang-level">Versatile & Powerful</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=en'">
+                <span class="lang-icon">JV</span>
+                <h4>Java</h4>
+                <span class="lang-level">Enterprise & Robust</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-CS&lang=en'">
+                <span class="lang-icon">C#</span>
+                <h4>C#</h4>
+                <span class="lang-level">Performant & Efficient</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scientific Computing & AI Section -->
+    <section id="ai-data-science" class="courses-section">
+        <div class="section-title reveal">
+            <h2>Scientific Computing & AI</h2>
+            <p>Advanced tools for data analysis, modeling, and machine intelligence.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-NUMPY&lang=en'">
+                <span class="lang-icon">NP</span>
+                <h4>NumPy</h4>
+                <span class="lang-level">Array Computing</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-PANDAS&lang=en'">
+                <span class="lang-icon">PD</span>
+                <h4>Pandas</h4>
+                <span class="lang-level">Data Manipulation</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-CV&lang=en'">
+                <span class="lang-icon">CV</span>
+                <h4>Computer Vision</h4>
+                <span class="lang-level">Visual Intelligence</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Lessons Section - Enhanced -->
+    <section id="private-lessons" class="private-lessons-section">
+        <div class="section-title reveal">
+            <h2>Private 1-on-1 Mentorship</h2>
+            <p>Personalized instruction tailored to your learning goals</p>
+        </div>
+
+        <div class="lessons-grid reveal-stagger">
+            <!-- Quick Info Cards -->
+            <div class="lesson-info-card">
+                <div class="info-icon">🎯</div>
+                <h4>Customized Learning</h4>
+                <p>Lessons designed specifically for your level and goals</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">🌍</div>
+                <h4>Your Language</h4>
+                <p>Instruction in English, Arabic, Hebrew, or Russian</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">⏰</div>
+                <h4>Flexible Schedule</h4>
+                <p>Book sessions at times that work for you</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">💡</div>
+                <h4>Expert Tutors</h4>
+                <p>Learn from experienced mathematicians and educators</p>
+            </div>
+        </div>
+
+        <div class="lessons-subjects">
+            <h3 style="text-align: center; color: var(--gold-primary); margin-bottom: 30px;">Available Subjects</h3>
+            <div class="subjects-grid">
+                <div class="subject-badge">📐 Calculus & Analysis</div>
+                <div class="subject-badge">🔢 Linear Algebra</div>
+                <div class="subject-badge">📊 Abstract Algebra</div>
+                <div class="subject-badge">∞ Real Analysis</div>
+                <div class="subject-badge">🔗 Topology</div>
+                <div class="subject-badge">📏 Differential Geometry</div>
+                <div class="subject-badge">🐍 Python Programming</div>
+                <div class="subject-badge">⚛️ Mathematical Physics</div>
+            </div>
+        </div>
+
+        <div class="lesson-pricing">
+            <div class="pricing-card">
+                <div class="pricing-duration">1 Hour</div>
+                <div class="pricing-amount">$35</div>
+                <div class="pricing-desc">Perfect for focused topics</div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Most Popular</div>
+                <div class="pricing-duration">1.5 Hours</div>
+                <div class="pricing-amount">$45</div>
+                <div class="pricing-desc">Ideal for comprehensive learning</div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-duration">2 Hours</div>
+                <div class="pricing-amount">$65</div>
+                <div class="pricing-desc">Deep dive into complex topics</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="book-lesson.html" class="btn-gold" style="font-size: 1.1rem; padding: 18px 50px;">
+                📚 Book Your Private Lesson Now
+            </a>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Careers / Join Faculty Section -->
+    <section id="careers" class="careers-section">
+        <div class="careers-card">
+            <div class="careers-content">
+                <h2>Join Our Faculty</h2>
+                <p>Are you a visionary educator? Help us shape the future of mathematics. We are looking for world-class
+                    lecturers and researchers to inspire the next generation at Tensor Academy.</p>
+                <a href="#" class="btn-gold">Apply to Teach</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="support" class="donation-section">
+        <div class="section-title">
+            <h2>Support Our Vision</h2>
+            <p>Your contribution fuels the next generation of mathematical discovery.</p>
+        </div>
+
+        <div class="payment-viewport">
+            <!-- 3D Card Scene -->
+            <div class="card-scene" onclick="this.querySelector('.card-object').classList.toggle('is-flipped')">
+                <div class="card-object" id="card-3d">
+                    <!-- Front -->
+                    <div class="card-face face-front">
+                        <div class="card-logo-display">∇ TENSOR</div>
+                        <div class="card-chip"></div>
+                        <div class="card-number-display" id="display-number">#### #### #### ####</div>
+                        <div class="card-details-row">
+                            <div class="detail-group">
+                                <span class="detail-label">Card Holder</span>
+                                <span class="detail-value" id="display-name">FULL NAME</span>
+                            </div>
+                            <div class="detail-group">
+                                <span class="detail-label">Expires</span>
+                                <span class="detail-value" id="display-date">MM/YY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back -->
+                    <div class="card-face face-back">
+                        <div class="magnetic-strip"></div>
+                        <div class="cvv-strip" id="display-cvv">***</div>
+                        <div class="cvv-label">CVV</div>
+                        <div class="card-back-logo">TENSOR</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Form -->
+            <div class="payment-form">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" class="payment-input" id="input-number" placeholder="xxxx xxxx xxxx xxxx"
+                        maxlength="19">
+                </div>
+                <div class="form-group">
+                    <label>Card Holder Name</label>
+                    <input type="text" class="payment-input" id="input-name" placeholder="Name on Card">
+                </div>
+                <div class="form-row-split">
+                    <div class="form-group" style="flex: 2;">
+                        <label>Expiration Date</label>
+                        <input type="text" class="payment-input" id="input-date" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>CVV</label>
+                        <input type="text" class="payment-input" id="input-cvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <button class="btn-submit" id="btn-payment-submit" style="margin-top: 20px;">Secure Payment</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="bit-wrapper">
+            <h4 style="margin-bottom: 10px; color: #fff;">For Israeli Citizens (Bit)</h4>
+            <div style="margin-bottom: 15px;">
+                <label
+                    style="color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <input type="checkbox" id="bit-recurring" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>Monthly Donation</span>
+                </label>
+            </div>
+            <button class="bit-btn">
+                <span>Pay with Bit</span>
+                <span style="font-size: 1.2em;">⚡</span>
+            </button>
+        </div>
+
+        <div class="donation-grid">
+            <button class="donate-amount-btn active">$50</button>
+            <button class="donate-amount-btn">$100</button>
+            <button class="donate-amount-btn">$500</button>
+            <button class="donate-amount-btn">$1000</button>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-logo">TENSOR</div>
+        <div class="footer-links">
+            <a href="#">Research</a>
+            <a href="#">Alumni</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+        </div>
+        <div class="visitor-counter">
+            <span class="visitor-icon">👁️</span>
+            <span>TOTAL VISITORS:</span>
+            <span class="visitor-number" id="visitor-count-value">0</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+            © 2026 Tensor International Math Institute. All Rights Reserved.
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Auth Modal -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="auth-modal">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+            <div class="auth-tabs">
+                <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="auth-error" id="login-error">Invalid credentials</div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="payment-input" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="payment-input" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">Login</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="auth-error" id="signup-error">Error creating account</div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="payment-input" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="payment-input" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="payment-input" id="signup-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="payment.js"></script>
+
+    <!-- Your existing code -->
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="payment.js"></script>
+
+    <!-- ADD THIS DATA COLLECTION SCRIPT RIGHT HERE -->
+    <script>
+        // Tensor Academy Data Collection System
+        (function () {
+            // Don't track in admin dashboard
+            if (window.location.pathname.includes('admin.html')) return;
+
+            // Initialize data storage
+            const initStorage = () => {
+                const defaults = {
+                    pageviews: [],
+                    clicks: [],
+                    signups: [],
+                    course_views: {},
+                    language_clicks: {},
+                    payments: [],
+                    lessons: []
+                };
+
+                Object.keys(defaults).forEach(key => {
+                    if (!localStorage.getItem(`tensor_${key}`)) {
+                        localStorage.setItem(`tensor_${key}`, JSON.stringify(defaults[key]));
+                    }
+                });
+            };
+
+            // Track page view
+            const trackPageView = () => {
+                try {
+                    const pageviews = JSON.parse(localStorage.getItem('tensor_pageviews') || '[]');
+                    pageviews.push({
+                        timestamp: new Date().toISOString(),
+                        page: window.location.pathname,
+                        url: window.location.href,
+                        referrer: document.referrer,
+                        screen: `${window.innerWidth}x${window.innerHeight}`,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                    });
+                    localStorage.setItem('tensor_pageviews', JSON.stringify(pageviews));
+                } catch (e) {
+                    console.log('Error tracking pageview:', e);
+                }
+            };
+
+            // Track click
+            const trackClick = (element) => {
+                try {
+                    const clicks = JSON.parse(localStorage.getItem('tensor_clicks') || '[]');
+                    clicks.push({
+                        timestamp: new Date().toISOString(),
+                        element: element.tagName.toLowerCase(),
+                        text: element.textContent.replace(/\s+/g, ' ').trim().substring(0, 100),
+                        id: element.id || '',
+                        className: element.className || '',
+                        href: element.href || '',
+                        page: window.location.pathname
+                    });
+                    localStorage.setItem('tensor_clicks', JSON.stringify(clicks));
+
+                    // Special tracking for specific elements
+                    if (element.classList.contains('course-card') || element.closest('.course-card')) {
+                        const courseCard = element.closest('.course-card');
+                        const courseName = courseCard.querySelector('h3')?.textContent ||
+                            courseCard.querySelector('.course-number')?.nextSibling?.textContent;
+                        if (courseName) trackCourseView(courseName.trim());
+                    }
+
+                    if (element.classList.contains('lang-card') || element.closest('.lang-card')) {
+                        const langCard = element.closest('.lang-card');
+                        const language = langCard.querySelector('h4')?.textContent ||
+                            langCard.querySelector('.lang-icon')?.nextSibling?.textContent;
+                        if (language) trackLanguageClick(language.trim());
+                    }
+
+                    if (element.classList.contains('lang-btn') && !element.classList.contains('active')) {
+                        const language = element.textContent.trim();
+                        if (language && language.length <= 5) trackLanguageClick(language);
+                    }
+                } catch (e) {
+                    console.log('Error tracking click:', e);
+                }
+            };
+
+            // Track form submission
+            const trackFormSubmit = (form) => {
+                try {
+                    const signups = JSON.parse(localStorage.getItem('tensor_signups') || '[]');
+                    const formData = new FormData(form);
+                    const data = {};
+
+                    formData.forEach((value, key) => {
+                        if (key !== 'password') data[key] = value;
+                    });
+
+                    signups.push({
+                        timestamp: new Date().toISOString(),
+                        formId: form.id || form.getAttribute('name') || 'unknown',
+                        action: form.action || '',
+                        method: form.method || 'post',
+                        ...data,
+                        page: window.location.pathname
+                    });
+
+                    localStorage.setItem('tensor_signups', JSON.stringify(signups));
+                    alert('Thank you! Your information has been saved.');
+                } catch (e) {
+                    console.log('Error tracking form:', e);
+                }
+            };
+
+            // Track course view
+            const trackCourseView = (courseName) => {
+                try {
+                    const courseViews = JSON.parse(localStorage.getItem('tensor_course_views') || '{}');
+                    courseViews[courseName] = (courseViews[courseName] || 0) + 1;
+                    localStorage.setItem('tensor_course_views', JSON.stringify(courseViews));
+                } catch (e) {
+                    console.log('Error tracking course:', e);
+                }
+            };
+
+            // Track language click
+            const trackLanguageClick = (language) => {
+                try {
+                    const languageClicks = JSON.parse(localStorage.getItem('tensor_language_clicks') || '{}');
+                    languageClicks[language] = (languageClicks[language] || 0) + 1;
+                    localStorage.setItem('tensor_language_clicks', JSON.stringify(languageClicks));
+                } catch (e) {
+                    console.log('Error tracking language:', e);
+                }
+            };
+
+            // Track payment attempt
+            const trackPayment = (amount, type) => {
+                try {
+                    const payments = JSON.parse(localStorage.getItem('tensor_payments') || '[]');
+                    payments.push({
+                        timestamp: new Date().toISOString(),
+                        amount: amount,
+                        type: type,
+                        currency: 'USD',
+                        status: 'attempted',
+                        page: window.location.pathname
+                    });
+                    localStorage.setItem('tensor_payments', JSON.stringify(payments));
+                } catch (e) {
+                    console.log('Error tracking payment:', e);
+                }
+            };
+
+            // Track lesson booking
+            const trackLesson = (subject, duration, price) => {
+                try {
+                    const lessons = JSON.parse(localStorage.getItem('tensor_lessons') || '[]');
+                    lessons.push({
+                        timestamp: new Date().toISOString(),
+                        subject: subject,
+                        duration: duration,
+                        price: price,
+                        status: 'requested',
+                        page: window.location.pathname
+                    });
+                    localStorage.setItem('tensor_lessons', JSON.stringify(lessons));
+                } catch (e) {
+                    console.log('Error tracking lesson:', e);
+                }
+            };
+
+            // Initialize
+            initStorage();
+            trackPageView();
+
+            // Set up event listeners after DOM loads
+            document.addEventListener('DOMContentLoaded', () => {
+                // Track all clicks
+                document.addEventListener('click', (e) => {
+                    const target = e.target;
+                    if (target.matches('a, button, .btn, .course-card, .lang-card, .lang-btn, .donate-amount-btn, .action-btn')) {
+                        trackClick(target);
+                    }
+                });
+
+                // Track form submissions
+                document.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    trackFormSubmit(e.target);
+
+                    // For demo - show success message
+                    alert('Form submitted! Data recorded.');
+
+                    // In real site, you would also submit to server
+                    // setTimeout(() => e.target.submit(), 100);
+                });
+
+                // Track specific payment buttons
+                document.querySelectorAll('.donate-amount-btn, .bit-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const amount = btn.textContent.match(/\$?\d+/)?.[0] || '0';
+                        const type = btn.classList.contains('bit-btn') ? 'Bit' : 'Credit Card';
+                        trackPayment(amount, type);
+                    });
+                });
+
+                // Track private lesson booking
+                document.querySelectorAll('.btn-gold').forEach(btn => {
+                    if (btn.textContent.includes('Book Your Private Lesson')) {
+                        btn.addEventListener('click', () => {
+                            trackLesson('General Math', '1 hour', '$35');
+                        });
+                    }
+                });
+
+                // Track login/signup button clicks
+                document.querySelectorAll('#nav-auth-btn, #mobile-auth-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        trackClick(btn);
+                    });
+                });
+
+                // Track all nav link clicks
+                document.querySelectorAll('.nav-item').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        trackClick(link);
+                    });
+                });
+
+                console.log('Tensor Academy data collection initialized');
+            });
+
+            // Track time on page
+            let pageLoadTime = Date.now();
+            window.addEventListener('beforeunload', () => {
+                const timeSpent = Date.now() - pageLoadTime;
+                const sessionData = JSON.parse(localStorage.getItem('tensor_session') || '{"sessions": [], "totalTime": 0}');
+                sessionData.sessions.push({
+                    timestamp: new Date().toISOString(),
+                    duration: timeSpent,
+                    page: window.location.pathname
+                });
+                sessionData.totalTime = (sessionData.totalTime || 0) + timeSpent;
+                localStorage.setItem('tensor_session', JSON.stringify(sessionData));
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
+
+</body>
+
+</html>

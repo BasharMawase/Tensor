@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טנזור | המכון הבינלאומי למתמטיקה</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->o make
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .logo,
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* RTL Adjustments */
+        .lang-switch {
+            border-left: none;
+            border-right: 1px solid var(--border-glass);
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
+        .nav-item {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Layers -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <canvas id="canvas-overlay"></canvas>
+
+    <!-- Navigation -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">∇</span> טנזור
+            </a>
+            <div class="lang-switch">
+                <a href="index.html" class="lang-btn">EN</a>
+                <a href="index_ar.html" class="lang-btn">AR</a>
+                <a href="index_he.html" class="lang-btn active">HE</a>
+                <a href="index_ru.html" class="lang-btn">RU</a>
+                <button id="nav-auth-btn" class="lang-btn"
+                    style="margin-right: 20px; border-color: var(--gold-primary); color: var(--gold-primary);">התחברות /
+                    הרשמה</button>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="החלף תפריט">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        <nav class="nav-links">
+            <a href="#about" class="nav-item">המכון</a>
+            <a href="#academics" class="nav-item">מתמטיקה</a>
+            <a href="#languages" class="nav-item">שפות</a>
+            <a href="#programming" class="nav-item">תכנות</a>
+            <a href="#ai-data-science" class="nav-item">בינה מלאכותית</a>
+            <a href="#contact" class="nav-item">צור קשר</a>
+            <a href="/admin" class="nav-item" id="nav-admin-link"
+                style="display: none; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 5px 10px; border-radius: 4px; margin-right: 10px;">ניהול</a>
+
+            <!-- Mobile Only Elements -->
+            <div class="mobile-only-nav">
+                <div class="mobile-lang-switch">
+                    <a href="index.html" class="lang-btn">EN</a>
+                    <a href="index_ar.html" class="lang-btn">AR</a>
+                    <a href="index_he.html" class="lang-btn active">HE</a>
+                    <a href="index_ru.html" class="lang-btn">RU</a>
+                </div>
+                <button id="mobile-auth-btn-he" class="btn-gold" style="width: 100%; margin-top: 20px;">התחברות /
+                    הרשמה</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1>לבנות את<br>מוח העתיד</h1>
+            <div class="hero-subtitle">המכון הבינלאומי למתמטיקה</div>
+            <p>
+                מקלט לחשיבה מתמטית קפדנית. גישור בין הפשטה טהורה לבין יישום משנה עולם דרך הקמפוסים הגלובליים שלנו.
+            </p>
+            <a href="#academics" class="btn-primary">גלה תוכניות</a>
+        </div>
+    </section>
+
+    <!-- About Us / Founder Section -->
+    <section id="about">
+        <div class="about-split">
+            <div class="about-text reveal-left">
+                <h3>המכון שלנו</h3>
+                <p>ממוקם במפגש שבין הפילוסופיה המתמטית להנדסה מעשית, אקדמיית טנזור מספקת סביבה חסרת תקדים לצמיחה
+                    אינטלקטואלית.</p>
+                <p>עם סניפים במרכזים המדעיים התוססים ביותר בעולם, אנו מציעים הן אינטנסיביות בקמפוס והן את הגמישות של
+                    מלגות וירטואליות.</p>
+            </div>
+            <div class="about-image reveal-right">
+                <img src="https://images.unsplash.com/photo-1509228468518-180dd482195b?q=80&w=2070&auto=format&fit=crop"
+                    alt="Institute Library">
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Institute Section -->
+    <section id="about">
+        <div class="section-title reveal">
+            <h2>פילוסופיית טנזור</h2>
+            <p>מתמטיקה היא השפה האוניברסלית של היקום. אנו מטפחים את המוחות הדוברים אותה בשטף.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>חזון גלובלי</h3>
+                <p>עם קמפוסים ב-4 יבשות, אנו מפגישים את המוחות המבריקים ביותר מתרבויות מגוונות, מאוחדים על ידי החיפוש
+                    אחר האמת המתמטית.</p>
+            </div>
+            <div class="glass-card">
+                <h3>בין-תחומי</h3>
+                <p>אנו מאמינים במפגש בין דיסציפלינות. תוכנית הלימודים שלנו משלבת פיזיקה, מדעי המחשב ופיננסים עם מתמטיקה
+                    עיונית.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics">
+        <div class="section-title reveal">
+            <h2>חטיבות אקדמיות</h2>
+            <p>מתיאוריה בסיסית ועד מודלים של מערכות מורכבות.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>מתמטיקה עיונית</h3>
+                <p>אלגברה, אנליזה, טופולוגיה ותורת המספרים. החיפוש אחר יופי ולוגיקה בצורתם הטהורה ביותר.</p>
+            </div>
+            <div class="glass-card">
+                <h3>מתמטיקה שימושית</h3>
+                <p>משוואות דיפרנציאליות, אופטימיזציה ודינמיקת נוזלים. פתרון הבעיות בעולם האמיתי של המחר.</p>
+            </div>
+            <div class="glass-card">
+                <h3>מדעי המחשב</h3>
+                <p>איפה שקוד פוגש חדו"א. עיצוב אלגוריתמים, קריפטוגרפיה ויסודות הבינה המלאכותית.</p>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    </section>
+
+    </section>
+
+    <!-- Math Courses Section -->
+    <section id="courses">
+        <div class="section-title reveal">
+            <h2>תוכנית הלימודים</h2>
+            <p>מסע קפדני דרך יסודות המתמטיקה המודרנית.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-101&lang=he'">
+                <span class="course-number">MTH-101</span>
+                <h3>חשבון אינפיניטסימלי</h3>
+                <p>שלטו במתמטיקה של השינוי. מגבולות ונגזרות ועד אינטגרציה רב-משתנית ושדות וקטורים.</p>
+                <div class="course-tags">
+                    <span class="course-tag">חיוני</span>
+                    <span class="course-tag">12 שבועות</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-102&lang=he'">
+                <span class="course-number">MTH-102</span>
+                <h3>אלגברה ליניארית</h3>
+                <p>חקר מרחבים וקטוריים והעתקות ליניאריות. עמוד השדרה של הפיזיקה המודרנית ומדעי הנתונים.</p>
+                <div class="course-tags">
+                    <span class="course-tag">יסודות</span>
+                    <span class="course-tag">10 שבועות</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-201&lang=he'">
+                <span class="course-number">MTH-201</span>
+                <h3>אלגברה מופשטת</h3>
+                <p>חקרו מבנים אלגבריים כגון חבורות, חוגים ושדות. השפה של הסימטריה.</p>
+                <div class="course-tags">
+                    <span class="course-tag">מתקדם</span>
+                    <span class="course-tag">14 שבועות</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-202&lang=he'">
+                <span class="course-number">MTH-202</span>
+                <h3>משוואות דיפרנציאליות חלקיות</h3>
+                <p>מידול תופעות פיזיקליות כולל חום, קול ודינמיקת נוזלים באמצעות משוואות דפרנציאליות.</p>
+                <div class="course-tags">
+                    <span class="course-tag">יישחומי</span>
+                    <span class="course-tag">12 שבועות</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-103&lang=he'">
+                <span class="course-number">MTH-103</span>
+                <h3>מתמטיקה בדידה</h3>
+                <p>תורת הגרפים, קומבינטוריקה ויסודות הלוגיקה של מדעי המחשב. חיוני לאלגוריתמים.</p>
+                <div class="course-tags">
+                    <span class="course-tag">חיוני</span>
+                    <span class="course-tag">10 שבועות</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-104&lang=he'">
+                <span class="course-number">MTH-104</span>
+                <h3>תורת ההסתברות</h3>
+                <p>כימות אי-הודאות. משתנים מקריים, התפלגויות ומשפטי גבול. המתמטיקה של המקרה.</p>
+                <div class="course-tags">
+                    <span class="course-tag">יסודות</span>
+                    <span class="course-tag">12 שבועות</span>
+                </div>
+            </div>
+            <div class="levels-banner">
+                <p>אקדמיית טנזור תומכת בתלמידים מכל <strong>הרמות</strong> — מ<strong>תלמידי בית ספר</strong> שאפתנים
+                    ועד חוקרים מתקדמים.</p>
+            </div>
+    </section>
+
+    <!-- Language Learning Section -->
+    <section id="languages" class="scientific-languages">
+        <div class="section-title reveal">
+            <h2>שפות מדעיות</h2>
+            <p>שליטה בשפות העיקריות של מחקר וכתבי עת בינלאומיים.</p>
+        </div>
+        <div class="lang-learning-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-EN&lang=he'">
+                <span class="lang-icon">EN</span>
+                <h4>אנגלית</h4>
+                <span class="lang-level">מדעי ואקדמי</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-AR&lang=he'">
+                <span class="lang-icon">AR</span>
+                <h4>ערבית</h4>
+                <span class="lang-level">מתחילים עד מתקדמים</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-RU&lang=he'">
+                <span class="lang-icon">RU</span>
+                <h4>רוסית</h4>
+                <span class="lang-level">טכני וספרותי</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-HE&lang=he'">
+                <span class="lang-icon">HE</span>
+                <h4>עברית</h4>
+                <span class="lang-level">ספרותית מודרנית</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Languages Section -->
+    <section id="programming" class="courses-section">
+        <div class="section-title reveal">
+            <h2>שפות תכנות</h2>
+            <p>שפות הנדסה בסיסיות לפיתוח תוכנה ומערכות.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-PY&lang=he'">
+                <span class="lang-icon">PY</span>
+                <h4>Python</h4>
+                <span class="lang-level">רב-תכליתית ועוצמתית</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=he'">
+                <span class="lang-icon">JV</span>
+                <h4>Java</h4>
+                <span class="lang-level">ארגונית וחזקה</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-CS&lang=he'">
+                <span class="lang-icon">C#</span>
+                <h4>C#</h4>
+                <span class="lang-level">ביצועים גבוהים ויעילה</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI & Data Science Section -->
+    <section id="ai-data-science" class="courses-section">
+        <div class="section-title reveal">
+            <h2>מחשוב מדעי ובינה מלאכותית</h2>
+            <p>כלים מתקדמים לניתוח נתונים, מידול ובינה חישובית.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-NUMPY&lang=he'">
+                <span class="lang-icon">NP</span>
+                <h4>NumPy</h4>
+                <span class="lang-level">חישוב מערכים</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-PANDAS&lang=he'">
+                <span class="lang-icon">PD</span>
+                <h4>Pandas</h4>
+                <span class="lang-level">עיבוד נתונים</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-CV&lang=he'">
+                <span class="lang-icon">CV</span>
+                <h4>ראייה ממוחשבת</h4>
+                <span class="lang-level">בינה חזותית</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Lessons Section - Enhanced -->
+    <section id="private-lessons" class="private-lessons-section">
+        <div class="section-title reveal">
+            <h2>חונכות אישית (1-על-1)</h2>
+            <p>הוראה מותאמת אישית ליעדי הלמידה שלך</p>
+        </div>
+
+        <div class="lessons-grid reveal-stagger">
+            <div class="lesson-info-card">
+                <div class="info-icon">🎯</div>
+                <h4>למידה מותאמת אישית</h4>
+                <p>שיעורים המיועדים במיוחד לרמה וליעדים שלך</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">🌍</div>
+                <h4>השפה שלך</h4>
+                <p>הדרכה באנגלית, ערבית, עברית או רוסית</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">⏰</div>
+                <h4>לוח זמנים גמיש</h4>
+                <p>הזמינו שיעורים בזמנים שמתאימים לכם</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">💡</div>
+                <h4>מדריכים מומחים</h4>
+                <p>למדו ממתמטיקאים ומחנכים מנוסים</p>
+            </div>
+        </div>
+
+        <div class="lessons-subjects">
+            <h3 style="text-align: center; color: var(--gold-primary); margin-bottom: 30px;">נושאים זמינים</h3>
+            <div class="subjects-grid">
+                <div class="subject-badge">📐 חדו"א ואנליזה</div>
+                <div class="subject-badge">🔢 אלגברה ליניארית</div>
+                <div class="subject-badge">📊 אלגברה מופשטת</div>
+                <div class="subject-badge">∞ אנליזה ממשית</div>
+                <div class="subject-badge">🔗 טופולוגיה</div>
+                <div class="subject-badge">📏 גיאומטרית</div>
+                <div class="subject-badge">🐍 פייתון</div>
+                <div class="subject-badge">⚛️ פיזיקה </div>
+            </div>
+        </div>
+
+        <div class="lesson-pricing">
+            <div class="pricing-card">
+                <div class="pricing-duration">שעה אחת</div>
+                <div class="pricing-amount">120₪</div>
+                <div class="pricing-desc">מושלם לנושאים ממוקדים</div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-badge">הכי פופולרי</div>
+                <div class="pricing-duration">שעה וחצי</div>
+                <div class="pricing-amount">165₪</div>
+                <div class="pricing-desc">אידיאלי ללמידה מקיפה</div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-duration">שעתיים</div>
+                <div class="pricing-amount">200₪</div>
+                <div class="pricing-desc">צלילה עמוקה לנושאים מורכבים</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="book-lesson.html" class="btn-gold" style="font-size: 1.1rem; padding: 18px 50px;">
+                📚 הזמינו את השיעור הפרטי שלכם עכשיו
+            </a>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Careers / Join Faculty Section -->
+    <section id="careers" class="careers-section">
+        <div class="careers-card">
+            <div class="careers-content">
+                <h2>הצטרפו לסגל שלנו</h2>
+                <p>האם אתם מחנכים בעלי חזון? עזרו לנו לעצב את עתיד המתמטיקה. אנו מחפשים מרצים וחוקרים ברמה עולמית כדי
+                    להעניק השראה לדור הבא באקדמיית טנזור.</p>
+                <a href="#" class="btn-gold">הגשת מועמדות להוראה</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="support" class="donation-section">
+        <div class="section-title">
+            <h2>תמכו בחזון שלנו</h2>
+            <p>התרומה שלכם מניעה את הדור הבא של תגליות מתמטיות.</p>
+        </div>
+
+        <div class="payment-viewport">
+            <!-- 3D Card Scene -->
+            <div class="card-scene" onclick="this.querySelector('.card-object').classList.toggle('is-flipped')">
+                <div class="card-object" id="card-3d">
+                    <!-- Front -->
+                    <div class="card-face face-front">
+                        <div class="card-logo-display">∇ TENSOR</div>
+                        <div class="card-chip"></div>
+                        <div class="card-number-display" id="display-number">#### #### #### ####</div>
+                        <div class="card-details-row">
+                            <div class="detail-group">
+                                <span class="detail-label"> בעל הכרטיס</span>
+                                <span class="detail-value" id="display-name">שם מלא</span>
+                            </div>
+                            <div class="detail-group">
+                                <span class="detail-label">תוקף</span>
+                                <span class="detail-value" id="display-date">MM/YY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back -->
+                    <div class="card-face face-back">
+                        <div class="magnetic-strip"></div>
+                        <div class="cvv-strip" id="display-cvv">***</div>
+                        <div class="cvv-label">CVV</div>
+                        <div class="card-back-logo">TENSOR</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Form -->
+            <div class="payment-form">
+                <div class="form-group">
+                    <label>מספר כרטיס</label>
+                    <input type="text" class="payment-input" id="input-number" placeholder="xxxx xxxx xxxx xxxx"
+                        maxlength="19">
+                </div>
+                <div class="form-group">
+                    <label>שם מלא על הכרטיס</label>
+                    <input type="text" class="payment-input" id="input-name" placeholder="שם כפי שמופיע בכרטיס">
+                </div>
+                <div class="form-row-split">
+                    <div class="form-group" style="flex: 2;">
+                        <label>תוקף</label>
+                        <input type="text" class="payment-input" id="input-date" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>CVV</label>
+                        <input type="text" class="payment-input" id="input-cvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <button class="btn-submit" style="margin-top: 20px;">תשלום מאובטח</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="bit-wrapper">
+            <h4 style="margin-bottom: 10px; color: #fff;">לאזרחי ישראל (Bit)</h4>
+            <div style="margin-bottom: 15px;">
+                <label
+                    style="color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <input type="checkbox" id="bit-recurring" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>תרומה חודשית</span>
+                </label>
+            </div>
+            <button class="bit-btn">
+                <span>שלם ב-Bit</span>
+                <span style="font-size: 1.2em;">⚡</span>
+            </button>
+        </div>
+
+        <div class="donation-grid">
+            <button class="donate-amount-btn active">₪50</button>
+            <button class="donate-amount-btn">₪200</button>
+            <button class="donate-amount-btn">₪500</button>
+            <button class="donate-amount-btn">₪1000</button>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-logo">טנזור</div>
+        <div class="footer-links">
+            <a href="#">מחקר</a>
+            <a href="#">בוגרים</a>
+            <a href="#">קריירה</a>
+            <a href="#">עיתונות</a>
+        </div>
+        <div class="visitor-counter">
+            <span class="visitor-icon">👁️</span>
+            <span>סה"כ מבקרים:</span>
+            <span class="visitor-number" id="visitor-count-value">0</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+            © 2026 המכון הבינלאומי למתמטיקה טנזור. כל הזכויות שמורות.
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Auth Modal -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="auth-modal">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+            <div class="auth-tabs">
+                <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">התחברות</button>
+                <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">הרשמה</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="auth-error" id="login-error">פרטים שגויים</div>
+                <div class="form-group">
+                    <label>אימייל</label>
+                    <input type="email" class="payment-input" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label>סיסמה</label>
+                    <input type="password" class="payment-input" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">כניסה</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="auth-error" id="signup-error">שגיאה ביצירת החשבון</div>
+                <div class="form-group">
+                    <label>שם מלא</label>
+                    <input type="text" class="payment-input" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label>אימייל</label>
+                    <input type="email" class="payment-input" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label>סיסמה</label>
+                    <input type="password" class="payment-input" id="signup-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">צור חשבון</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="payment.js"></script>
+</body>
+
+</html

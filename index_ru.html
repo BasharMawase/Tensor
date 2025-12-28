@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тензор | Международный Математический Институт</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Layers -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <canvas id="canvas-overlay"></canvas>
+
+    <!-- Navigation -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">∇</span> ТЕНЗОР
+            </a>
+            <div class="lang-switch">
+                <a href="index.html" class="lang-btn">EN</a>
+                <a href="index_ar.html" class="lang-btn">AR</a>
+                <a href="index_he.html" class="lang-btn">HE</a>
+                <a href="index_ru.html" class="lang-btn active">RU</a>
+                <button id="nav-auth-btn" class="lang-btn"
+                    style="margin-left: 20px; border-color: var(--gold-primary); color: var(--gold-primary);">Войти /
+                    Регистрация</button>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Переключить меню">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        <nav class="nav-links">
+            <a href="#about" class="nav-item">Институт</a>
+            <a href="#academics" class="nav-item">Математика</a>
+            <a href="#languages" class="nav-item">Языки</a>
+            <a href="#programming" class="nav-item">Программирование</a>
+            <a href="#ai-data-science" class="nav-item">ИИ и Данные</a>
+            <a href="#contact" class="nav-item">Контакты</a>
+            <a href="/admin" class="nav-item" id="nav-admin-link"
+                style="display: none; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 5px 10px; border-radius: 4px; margin-left: 10px;">Админ</a>
+
+            <!-- Mobile Only Elements -->
+            <div class="mobile-only-nav">
+                <div class="mobile-lang-switch">
+                    <a href="index.html" class="lang-btn">EN</a>
+                    <a href="index_ar.html" class="lang-btn">AR</a>
+                    <a href="index_he.html" class="lang-btn">HE</a>
+                    <a href="index_ru.html" class="lang-btn active">RU</a>
+                </div>
+                <button id="mobile-auth-btn-ru" class="btn-gold" style="width: 100%; margin-top: 20px;">Войти /
+                    Регистрация</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1>Создавая<br>Разум Будущего</h1>
+            <div class="hero-subtitle">Международный Математический Институт</div>
+            <p>
+                Обитель строгой математической мысли. Объединение чистой абстракции с приложениями, меняющими мир, через
+                наши глобальные кампусы.
+            </p>
+            <a href="#academics" class="btn-primary">Исследовать Программы</a>
+        </div>
+    </section>
+
+    <!-- About Us / Founder Section -->
+    <section id="about">
+        <div class="about-split">
+            <div class="about-text reveal-left">
+                <h3>Наш Институт</h3>
+                <p>Расположенный на стыке математической философии и практической инженерии, Tensor Academy обеспечивает
+                    беспрецедентную среду для интеллектуального роста.</p>
+                <p>Имея филиалы в самых динамичных мировых научных центрах, мы предлагаем как интенсивное обучение в
+                    кампусе, так и гибкость виртуальных сообществ.</p>
+            </div>
+            <div class="about-image reveal-right">
+                <img src="https://images.unsplash.com/photo-1509228468518-180dd482195b?q=80&w=2070&auto=format&fit=crop"
+                    alt="Institute Library">
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Institute Section -->
+    <section id="about-philosophy">
+        <div class="section-title reveal">
+            <h2>Философия Тензор</h2>
+            <p>Математика — это универсальный язык вселенной. Мы воспитываем умы, которые говорят на нем свободно.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>Глобальное Видение</h3>
+                <p>Имея кампусы на 4 континентах, мы объединяем ярчайшие умы из разных культур, объединенные поиском
+                    математической истины.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Междисциплинарность</h3>
+                <p>Мы верим в пересечение дисциплин. Наша учебная программа интегрирует физику, информатику и финансы с
+                    чистой математикой.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics">
+        <div class="section-title reveal">
+            <h2>Академические Отделения</h2>
+            <p>От фундаментальной теории до моделирования сложных систем.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>Чистая Математика</h3>
+                <p>Алгебра, Анализ, Топология и Теория Чисел. Поиск красоты и логики в их чистейшей форме.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Прикладная Математика</h3>
+                <p>Дифференциальные Уравнения, Оптимизация и Гидродинамика. Решение реальных проблем завтрашнего дня.
+                </p>
+            </div>
+            <div class="glass-card">
+                <h3>Вычислительные Науки</h3>
+                <p>Где код встречается с исчислением. Разработка алгоритмов, криптография и основы искусственного
+                    интеллекта.</p>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    </section>
+
+    </section>
+
+    <!-- Math Courses Section -->
+    <section id="courses">
+        <div class="section-title reveal">
+            <h2>Основная Программа</h2>
+            <p>Строгое путешествие через основы современной математики.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-101&lang=ru'">
+                <span class="course-number">MTH-101</span>
+                <h3>Математический Анализ</h3>
+                <p>Овладейте математикой изменений. От пределов и производных до многомерного интегрирования.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Основной</span>
+                    <span class="course-tag">12 Недель</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-102&lang=ru'">
+                <span class="course-number">MTH-102</span>
+                <h3>Линейная Алгебра</h3>
+                <p>Изучение векторных пространств и линейных отображений. Основа современной физики и Data Science.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Базовый</span>
+                    <span class="course-tag">10 Недель</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-201&lang=ru'">
+                <span class="course-number">MTH-201</span>
+                <h3>Абстрактная Алгебра</h3>
+                <p>Изучайте алгебраические структуры, такие как группы, кольца и поля. Язык симметрии.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Продвинутый</span>
+                    <span class="course-tag">14 Недель</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-202&lang=ru'">
+                <span class="course-number">MTH-202</span>
+                <h3>Дифференциальные Уравнения</h3>
+                <p>Моделирование физических явлений, включая тепло, звук и гидродинамику, с помощью уравнений.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Прикладной</span>
+                    <span class="course-tag">12 Недель</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-103&lang=ru'">
+                <span class="course-number">MTH-103</span>
+                <h3>Дискретная Математика</h3>
+                <p>Теория графов, комбинаторика и основы логики. Фундамент для компьютерных наук.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Основной</span>
+                    <span class="course-tag">10 Недель</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-104&lang=ru'">
+                <span class="course-number">MTH-104</span>
+                <h3>Теория Вероятностей</h3>
+                <p>Оценка неопределенности. Случайные величины, распределения и предельные теоремы. Математика шанса.
+                </p>
+                <div class="course-tags">
+                    <span class="course-tag">Базовый</span>
+                    <span class="course-tag">12 Недель</span>
+                </div>
+            </div>
+            <div class="levels-banner reveal">
+                <p>Академия Тензор поддерживает студентов <strong>всех уровней</strong> — от амбициозных
+                    <strong>школьников</strong> до передовых исследователей.
+                </p>
+            </div>
+    </section>
+
+    <!-- Language Learning Section -->
+    <section id="languages" class="scientific-languages">
+        <div class="section-title reveal">
+            <h2>Научные Языки</h2>
+            <p>Освоение основных языков международных исследований и журналов.</p>
+        </div>
+        <div class="lang-learning-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-EN&lang=ru'">
+                <span class="lang-icon">EN</span>
+                <h4>Английский</h4>
+                <span class="lang-level">Научный и Академический</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-AR&lang=ru'">
+                <span class="lang-icon">AR</span>
+                <h4>Арабский</h4>
+                <span class="lang-level">От начального до продвинутого</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-RU&lang=ru'">
+                <span class="lang-icon">RU</span>
+                <h4>Русский</h4>
+                <span class="lang-level">Технический и Литературный</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-HE&lang=ru'">
+                <span class="lang-icon">HE</span>
+                <h4>Иврит</h4>
+                <span class="lang-level">От начального до продвинутого</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Languages Section -->
+    <section id="programming" class="courses-section">
+        <div class="section-title reveal">
+            <h2>Языки Программирования</h2>
+            <p>Основные инженерные языки для разработки программного обеспечения и систем.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-PY&lang=ru'">
+                <span class="lang-icon">PY</span>
+                <h4>Python</h4>
+                <span class="lang-level">Универсальный и Мощный</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=ru'">
+                <span class="lang-icon">JV</span>
+                <h4>Java</h4>
+                <span class="lang-level">Корпоративный и Надежный</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-CS&lang=ru'">
+                <span class="lang-icon">C#</span>
+                <h4>C#</h4>
+                <span class="lang-level">Высокопроизводительный</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI & Data Science Section -->
+    <section id="ai-data-science" class="courses-section">
+        <div class="section-title reveal">
+            <h2>Научные Вычисления и ИИ</h2>
+            <p>Передовые инструменты для анализа данных, моделирования и машинного интеллекта.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-NUMPY&lang=ru'">
+                <span class="lang-icon">NP</span>
+                <h4>NumPy</h4>
+                <span class="lang-level">Вычисления с Массивами</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-PANDAS&lang=ru'">
+                <span class="lang-icon">PD</span>
+                <h4>Pandas</h4>
+                <span class="lang-level">Манипуляция Данными</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-CV&lang=ru'">
+                <span class="lang-icon">CV</span>
+                <h4>Компьютерное Зрение</h4>
+                <span class="lang-level">Визуальный Интеллект</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Lessons Section - Enhanced -->
+    <section id="private-lessons" class="private-lessons-section">
+        <div class="section-title reveal">
+            <h2>Индивидуальное Наставничество</h2>
+            <p>Персонализированное обучение, адаптированное к вашим целям</p>
+        </div>
+
+        <div class="lessons-grid reveal-stagger">
+            <div class="lesson-info-card">
+                <div class="info-icon">🎯</div>
+                <h4>Индивидуальное обучение</h4>
+                <p>Уроки, разработанные специально для вашего уровня и целей</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">🌍</div>
+                <h4>Ваш Язык</h4>
+                <p>Обучение на английском, арабском, иврите или русском</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">⏰</div>
+                <h4>Гибкий График</h4>
+                <p>Бронируйте занятия в удобное для вас время</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">💡</div>
+                <h4>Экспертные Преподаватели</h4>
+                <p>Учитесь у опытных математиков и педагогов</p>
+            </div>
+        </div>
+
+        <div class="lessons-subjects">
+            <h3 style="text-align: center; color: var(--gold-primary); margin-bottom: 30px;">Доступные Предметы</h3>
+            <div class="subjects-grid">
+                <div class="subject-badge">📐 Матанализ</div>
+                <div class="subject-badge">🔢 Линейная Алгебра</div>
+                <div class="subject-badge">📊 Абстрактная Алгебра</div>
+                <div class="subject-badge">∞ Функциональный Анализ</div>
+                <div class="subject-badge">🔗 Топология</div>
+                <div class="subject-badge">📏 Геометрия</div>
+                <div class="subject-badge">🐍 Python</div>
+                <div class="subject-badge">⚛️ Физика</div>
+            </div>
+        </div>
+
+        <div class="lesson-pricing">
+            <div class="pricing-card">
+                <div class="pricing-duration">1 Час</div>
+                <div class="pricing-amount">2500₽</div>
+                <div class="pricing-desc">Идеально для конкретных тем</div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Самый Популярный</div>
+                <div class="pricing-duration">1.5 Часа</div>
+                <div class="pricing-amount">3700₽</div>
+                <div class="pricing-desc">Идеально для всестороннего обучения</div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-duration">2 Часа</div>
+                <div class="pricing-amount">4500₽</div>
+                <div class="pricing-desc">Глубокое погружение в сложные темы</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="book-lesson.html" class="btn-gold" style="font-size: 1.1rem; padding: 18px 50px;">
+                📚 Забронировать Частный Урок
+            </a>
+        </div>
+    </section>
+
+    <!-- Careers / Join Faculty Section -->
+    <section id="careers" class="careers-section">
+        <div class="careers-card">
+            <div class="careers-content">
+                <h2>Присоединяйтесь к Факультету</h2>
+                <p>Вы дальновидный педагог? Помогите нам формировать будущее математики. Мы ищем лекторов и
+                    исследователей мирового класса, чтобы вдохновлять следующее поколение в Академии Тензор.</p>
+                <a href="#" class="btn-gold">Подать Заявку</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="support" class="donation-section">
+        <div class="section-title">
+            <h2>Поддержите Наше Видение</h2>
+            <p>Ваш вклад питает следующее поколение математических открытий.</p>
+        </div>
+        <div class="payment-viewport">
+            <!-- 3D Card Scene -->
+            <div class="card-scene" onclick="this.querySelector('.card-object').classList.toggle('is-flipped')">
+                <div class="card-object" id="card-3d">
+                    <!-- Front -->
+                    <div class="card-face face-front"
+                        style="background: linear-gradient(135deg, #1d4d2b 0%, #0a252f 100%);">
+                        <div class="card-logo-display">∇ TENSOR</div>
+                        <div class="card-mir-logo">МИР</div>
+                        <div class="card-chip"></div>
+                        <div class="card-number-display" id="display-number">#### #### #### ####</div>
+                        <div class="card-details-row">
+                            <div class="detail-group">
+                                <span class="detail-label">Владелец Карты</span>
+                                <span class="detail-value" id="display-name">ПОЛНОЕ ИМЯ</span>
+                            </div>
+                            <div class="detail-group">
+                                <span class="detail-label">Срок Действия</span>
+                                <span class="detail-value" id="display-date">MM/YY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back -->
+                    <div class="card-face face-back">
+                        <div class="magnetic-strip"></div>
+                        <div class="cvv-strip" id="display-cvv">***</div>
+                        <div class="cvv-label">CVV</div>
+                        <div class="card-back-logo">TENSOR</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Form -->
+            <div class="payment-form">
+                <div class="form-group">
+                    <label>Номер Карты</label>
+                    <input type="text" class="payment-input" id="input-number" placeholder="xxxx xxxx xxxx xxxx"
+                        maxlength="19">
+                </div>
+                <div class="form-group">
+                    <label>Имя Владельца</label>
+                    <input type="text" class="payment-input" id="input-name" placeholder="Как на карте">
+                </div>
+                <div class="form-row-split">
+                    <div class="form-group" style="flex: 2;">
+                        <label>Срок Действия</label>
+                        <input type="text" class="payment-input" id="input-date" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>CVV / CVC</label>
+                        <input type="text" class="payment-input" id="input-cvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <button class="btn-submit" id="btn-payment-submit" style="margin-top: 20px;">Оплатить Сейчас</button>
+            </div>
+        </div>
+
+        <div class="donation-grid">
+            <button class="donate-amount-btn active">5000₽</button>
+            <button class="donate-amount-btn">10000₽</button>
+            <button class="donate-amount-btn">25000₽</button>
+            <button class="donate-amount-btn">50000₽</button>
+        </div>
+        <button class="custom-donate-btn">Другая Сумма</button>
+
+        <br>
+
+        <div class="mir-wrapper"
+            style="margin-top: 30px; border: 1px dashed var(--gold-secondary); padding: 20px; border-radius: 15px; background: rgba(242, 209, 132, 0.05);">
+            <h4 style="margin-bottom: 15px; color: gold; font-family: 'Amiri', serif;">Система Быстрых Платежей (СБП)
+            </h4>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button class="mir-btn" style="flex: 1;">
+                    <span>СБП / МИР</span>
+                    <span style="font-size: 1.2em;">🌐</span>
+                </button>
+                <button class="mir-btn" style="flex: 1; min-width: 140px;">
+                    <span>Яндекс Пэй</span>
+                    <span style="font-size: 1.2em;">💳</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-logo">ТЕНЗОР</div>
+        <div class="footer-links">
+            <a href="#">Исследования</a>
+            <a href="#">Выпускники</a>
+            <a href="#">Карьера</a>
+            <a href="#">Пресса</a>
+        </div>
+        <div class="visitor-counter">
+            <span class="visitor-icon">👁️</span>
+            <span>Всего посетителей:</span>
+            <span class="visitor-number" id="visitor-count-value">0</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+            © 2026 Международный Математический Институт Тензор. Все права защищены.
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Auth Modal -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="auth-modal">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+            <div class="auth-tabs">
+                <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Войти</button>
+                <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">Регистрация</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="auth-error" id="login-error">Неверные данные</div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="payment-input" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" class="payment-input" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">Войти</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="auth-error" id="signup-error">Ошибка при создании аккаунта</div>
+                <div class="form-group">
+                    <label>Полное Имя</label>
+                    <input type="text" class="payment-input" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="payment-input" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" class="payment-input" id="signup-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">Создать Аккаунт</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="payment.js"></script>
+</body>
+
+</html>

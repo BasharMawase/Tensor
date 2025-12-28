@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Private Lessons - Tensor Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .booking-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.95));
+            border: 1px solid var(--gold-secondary);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .booking-header h1 {
+            font-size: 2.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .booking-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .booking-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: var(--border-glass);
+            z-index: 0;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(242, 209, 132, 0.1);
+            border: 2px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            color: var(--bg-deep);
+            box-shadow: 0 0 20px rgba(242, 209, 132, 0.5);
+        }
+
+        .step.completed .step-number {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .step-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .step.active .step-label {
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        .booking-form-section {
+            display: none;
+        }
+
+        .booking-form-section.active {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .selection-card {
+            background: rgba(17, 34, 64, 0.4);
+            border: 2px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .selection-card:hover {
+            border-color: var(--gold-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(242, 209, 132, 0.2);
+        }
+
+        .selection-card.selected {
+            border-color: var(--gold-primary);
+            background: rgba(242, 209, 132, 0.1);
+            box-shadow: 0 0 30px rgba(242, 209, 132, 0.3);
+        }
+
+        .selection-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .selection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 5px;
+        }
+
+        .selection-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-section-title {
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .booking-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--text-muted);
+            color: var(--text-muted);
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+
+        .summary-box {
+            background: rgba(10, 25, 47, 0.6);
+            border: 1px solid var(--gold-secondary);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+        }
+
+        .summary-label {
+            color: var(--text-muted);
+        }
+
+        .summary-value {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .booking-container {
+                margin: 20px 15px;
+                padding: 25px 20px;
+            }
+
+            .booking-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .booking-steps {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                gap: 10px;
+                justify-content: flex-start;
+            }
+
+            .booking-steps::before {
+                display: none;
+            }
+
+            .step {
+                min-width: 80px;
+                flex: none;
+            }
+
+            .selection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .summary-item span {
+                text-align: left;
+            }
+
+            .form-section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">∇</span> TENSOR
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">← Back to Home</a>
+        </nav>
+    </header>
+
+    <div class="booking-container">
+        <div class="booking-header">
+            <h1>Book Your Private Lesson</h1>
+            <p>Personalized one-on-one instruction tailored to your needs</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="booking-steps">
+            <div class="step active" id="step-1">
+                <div class="step-number">1</div>
+                <div class="step-label">Language</div>
+            </div>
+            <div class="step" id="step-2">
+                <div class="step-number">2</div>
+                <div class="step-label">Subject</div>
+            </div>
+            <div class="step" id="step-3">
+                <div class="step-number">3</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="step" id="step-4">
+                <div class="step-number">4</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </div>
+
+        <!-- Step 1: Language Selection -->
+        <div class="booking-form-section active" id="section-1">
+            <h3 class="form-section-title">Choose Your Preferred Language</h3>
+            <div class="selection-grid">
+                <div class="selection-card" data-language="en">
+                    <span class="selection-icon">🇬🇧</span>
+                    <div class="selection-title">English</div>
+                    <div class="selection-desc">Lessons in English</div>
+                </div>
+                <div class="selection-card" data-language="ar">
+                    <span class="selection-icon">🇸🇦</span>
+                    <div class="selection-title">العربية</div>
+                    <div class="selection-desc">دروس بالعربية</div>
+                </div>
+                <div class="selection-card" data-language="he">
+                    <span class="selection-icon">🇮🇱</span>
+                    <div class="selection-title">עברית</div>
+                    <div class="selection-desc">שיעורים בעברית</div>
+                </div>
+                <div class="selection-card" data-language="ru">
+                    <span class="selection-icon">🇷🇺</span>
+                    <div class="selection-title">Русский</div>
+                    <div class="selection-desc">Уроки на русском</div>
+                </div>
+            </div>
+            <div class="booking-actions">
+                <button class="btn-primary" onclick="nextStep()" id="next-1" disabled>Continue →</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Subject Selection -->
+        <div class="booking-form-section" id="section-2">
+            <h3 class="form-section-title">Select Your Subject</h3>
+            <div class="selection-grid">
+                <div class="selection-card" data-subject="calculus">
+                    <span class="selection-icon">📐</span>
+                    <div class="selection-title">Calculus</div>
+                    <div class="selection-desc">Derivatives, Integrals</div>
+                </div>
+                <div class="selection-card" data-subject="algebra">
+                    <span class="selection-icon">🔢</span>
+                    <div class="selection-title">Algebra</div>
+                    <div class="selection-desc">Linear & Abstract</div>
+                </div>
+                <div class="selection-card" data-subject="geometry">
+                    <span class="selection-icon">📏</span>
+                    <div class="selection-title">Geometry</div>
+                    <div class="selection-desc">Euclidean & Differential</div>
+                </div>
+                <div class="selection-card" data-subject="analysis">
+                    <span class="selection-icon">∞</span>
+                    <div class="selection-title">Analysis</div>
+                    <div class="selection-desc">Real & Complex</div>
+                </div>
+                <div class="selection-card" data-subject="topology">
+                    <span class="selection-icon">🔗</span>
+                    <div class="selection-title">Topology</div>
+                    <div class="selection-desc">Point-Set & Algebraic</div>
+                </div>
+                <div class="selection-card" data-subject="python">
+                    <span class="selection-icon">🐍</span>
+                    <div class="selection-title">Python</div>
+                    <div class="selection-desc">Programming & Data Science</div>
+                </div>
+                <div class="selection-card" data-subject="custom" id="custom-subject-card">
+                    <span class="selection-icon">✨</span>
+                    <div class="selection-title">Other / Custom</div>
+                    <div class="selection-desc">Tell us what you want to learn</div>
+                </div>
+            </div>
+
+            <div id="custom-subject-input-container" style="display: none; margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 10px; color: var(--gold-primary);">Specify Your
+                    Subject</label>
+                <input type="text" class="payment-input" id="custom-subject-name"
+                    placeholder="e.g., Quantum Mechanics, Game Theory...">
+            </div>
+            <div class="booking-actions">
+                <button class="btn-secondary" onclick="prevStep()">← Back</button>
+                <button class="btn-primary" onclick="nextStep()" id="next-2" disabled>Continue →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Details -->
+        <div class="booking-form-section" id="section-3">
+            <h3 class="form-section-title">Lesson Details</h3>
+            <form id="details-form">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" class="payment-input" id="student-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" class="payment-input" id="student-email" required>
+                </div>
+                <div class="form-row-split" style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Country Code *</label>
+                        <input type="text" class="payment-input" id="student-country-code" placeholder="+1" required>
+                    </div>
+                    <div class="form-group" style="flex: 3;">
+                        <label>Phone Number *</label>
+                        <input type="tel" class="payment-input" id="student-phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Lesson Duration</label>
+                    <select class="payment-input" id="lesson-duration">
+                        <option value="60">1 Hour</option>
+                        <option value="90">1.5 Hours</option>
+                        <option value="120">2 Hours</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea class="payment-input" id="lesson-notes" rows="4"
+                        placeholder="Tell us about your learning goals, current level, specific topics you want to cover..."></textarea>
+                </div>
+            </form>
+            <div class="booking-actions">
+                <button class="btn-secondary" onclick="prevStep()">← Back</button>
+                <button class="btn-primary" onclick="nextStep()">Continue →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Confirmation -->
+        <div class="booking-form-section" id="section-4">
+            <h3 class="form-section-title">Confirm Your Booking</h3>
+            <div class="summary-box">
+                <div class="summary-item">
+                    <span class="summary-label">Language:</span>
+                    <span class="summary-value" id="summary-language">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Subject:</span>
+                    <span class="summary-value" id="summary-subject">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Student:</span>
+                    <span class="summary-value" id="summary-name">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Email:</span>
+                    <span class="summary-value" id="summary-email">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Duration:</span>
+                    <span class="summary-value" id="summary-duration">-</span>
+                </div>
+            </div>
+            <div class="booking-actions">
+                <button class="btn-secondary" onclick="prevStep()">← Back</button>
+                <button class="btn-primary" onclick="confirmBooking()">Confirm Booking →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="booking.js"></script>
+</body>
+
+</html>

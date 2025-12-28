@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنسور | معهد الرياضيات الدولي</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            font-size: 1.05rem;
+            /* Slight increase for Arabic legibility */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .logo,
+        .hero-subtitle {
+            font-family: 'Amiri', serif;
+            /* Changed to Amiri */
+        }
+
+        .nav-item,
+        .btn-primary {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* Adjust Hero Title line-height for Arabic */
+        .hero h1 {
+            line-height: 1.3;
+        }
+
+        /* RTL Adjustments */
+        .lang-switch {
+            border-left: none;
+            border-right: 1px solid var(--border-glass);
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
+        .nav-item {
+            margin: 0 5px;
+        }
+
+        .course-item::after {
+            right: auto;
+            left: 40px;
+            transform: scaleX(-1);
+        }
+
+        .course-item:hover::after {
+            transform: translateX(-5px) scaleX(-1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Layers -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <canvas id="canvas-overlay"></canvas>
+
+    <!-- Navigation -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">∇</span> تنسور
+            </a>
+            <div class="lang-switch">
+                <a href="index.html" class="lang-btn">EN</a>
+                <a href="index_ar.html" class="lang-btn active">AR</a>
+                <a href="index_he.html" class="lang-btn">HE</a>
+                <a href="index_ru.html" class="lang-btn">RU</a>
+                <button id="nav-auth-btn" class="lang-btn"
+                    style="margin-right: 20px; border-color: var(--gold-primary); color: var(--gold-primary);">دخول /
+                    تسجيل</button>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="تبديل القائمة">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        <nav class="nav-links">
+            <a href="#about" class="nav-item">المعهد</a>
+            <a href="#academics" class="nav-item">الرياضيات</a>
+            <a href="#languages" class="nav-item">اللغات</a>
+            <a href="#programming" class="nav-item">البرمجة</a>
+            <a href="#ai-data-science" class="nav-item">الذكاء الاصطناعي</a>
+            <a href="#contact" class="nav-item">اتصل بنا</a>
+            <a href="/admin" class="nav-item" id="nav-admin-link"
+                style="display: none; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 5px 10px; border-radius: 4px; margin-right: 10px;">لوحة
+                الإدارة</a>
+
+            <!-- Mobile Only Elements -->
+            <div class="mobile-only-nav">
+                <div class="mobile-lang-switch">
+                    <a href="index.html" class="lang-btn">EN</a>
+                    <a href="index_ar.html" class="lang-btn active">AR</a>
+                    <a href="index_he.html" class="lang-btn">HE</a>
+                    <a href="index_ru.html" class="lang-btn">RU</a>
+                </div>
+                <button id="mobile-auth-btn-ar" class="btn-gold" style="width: 100%; margin-top: 20px;">دخول /
+                    تسجيل</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1>بناء<br>العقل المستقبلي</h1>
+            <div class="hero-subtitle">معهد الرياضيات الدولي</div>
+            <p>
+                ملاذ للفكر الرياضي الدقيق. نربط التجريد البحت بالتطبيقات التي تغير العالم من خلال فروعنا العالمية.
+            </p>
+            <a href="#academics" class="btn-primary">استكشف البرامج</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-split">
+            <div class="about-text reveal-left">
+                <h3>معهدنا</h3>
+                <p>يقع معهد أكاديمية تنسور عند تقاطع الفلسفة الرياضية والهندسة العملية، ويوفر بيئة لا مثيل لها للنمو
+                    الفكري.</p>
+                <p>من خلال فروعنا في أكثر المراكز العلمية حيوية في العالم، نقدم كلاً من الكثافة الدراسية في الحرم
+                    الجامعي ومرونة الزمالات الافتراضية.</p>
+            </div>
+            <div class="about-image reveal-right">
+                <img src="https://images.unsplash.com/photo-1509228468518-180dd482195b?q=80&w=2070&auto=format&fit=crop"
+                    alt="Institute Library">
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Institute Section -->
+    <section id="about">
+        <div class="section-title reveal">
+            <h2>فلسفة تنسور</h2>
+            <p>الرياضيات هي اللغة الكونية للكون. نحن نرعى العقول التي تتحدثها بطلاقة.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>رؤية عالمية</h3>
+                <p>مع فروع في 4 قارات، نجمع ألمع العقول من ثقافات متنوعة، متحدين من خلال السعي وراء الحقيقة الرياضية.
+                </p>
+            </div>
+            <!-- Removed Elite Faculty Card -->
+            <div class="glass-card">
+                <h3>متعدد التخصصات</h3>
+                <p>نحن نؤمن بتقاطع التخصصات. يدمج منهجنا الفيزياء وعلوم الكمبيوتر والتمويل مع الرياضيات البحتة.</p>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    </section>
+
+    <!-- Math Courses Section -->
+    <section id="courses">
+        <div class="section-title reveal">
+            <h2>المنهج الأساسي</h2>
+            <p>رحلة صارمة عبر أسس الرياضيات الحديثة.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-101&lang=ar'">
+                <span class="course-number">MTH-101</span>
+                <h3>التفاضل والتكامل</h3>
+                <p>أتقن رياضيات التغيير. من النهايات والمشتقات إلى التكامل متعدد المتغيرات وحقول المتجهات.</p>
+                <div class="course-tags">
+                    <span class="course-tag">أساسي</span>
+                    <span class="course-tag">12 أسبوع</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-102&lang=ar'">
+                <span class="course-number">MTH-102</span>
+                <h3>الجبر الخطي</h3>
+                <p>دراسة فضاءات المتجهات والتحويلات الخطية. العمود الفقري للفيزياء الحديثة وعلوم البيانات.</p>
+                <div class="course-tags">
+                    <span class="course-tag">تأسيسي</span>
+                    <span class="course-tag">10 أسابيع</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-201&lang=ar'">
+                <span class="course-number">MTH-201</span>
+                <h3>الجبر المجرد</h3>
+                <p>استكشف الهياكل الجبرية مثل المجموعات والحلقات والحقول. لغة التناظر.</p>
+                <div class="course-tags">
+                    <span class="course-tag">متقدم</span>
+                    <span class="course-tag">14 أسبوع</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-202&lang=ar'">
+                <span class="course-number">MTH-202</span>
+                <h3>المعادلات التفاضلية الجزئية</h3>
+                <p>نمذجة الظواهر الفيزيائية بما في ذلك الحرارة والصوت وديناميات الموائع باستخدام المعادلات.</p>
+                <div class="course-tags">
+                    <span class="course-tag">تطبيقي</span>
+                    <span class="course-tag">12 أسبوع</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-103&lang=ar'">
+                <span class="course-number">MTH-103</span>
+                <h3>الرياضيات المتقطعة</h3>
+                <p>نظرية المخططات، التوافقيات، وأسس منطق علوم الحاسوب. ضروري للخوارزميات.</p>
+                <div class="course-tags">
+                    <span class="course-tag">أساسي</span>
+                    <span class="course-tag">10 أسابيع</span>
+                </div>
+            </div>
+            <div class="course-card" onclick="window.location.href='course.html?id=MTH-104&lang=ar'">
+                <span class="course-number">MTH-104</span>
+                <h3>نظرية الاحتمالات</h3>
+                <p>قياس عدم اليقين. المتغيرات العشوائية، التوزيعات، ونظريات النهايات. رياضيات الصدفة.</p>
+                <div class="course-tags">
+                    <span class="course-tag">تأسيسي</span>
+                    <span class="course-tag">12 أسبوع</span>
+                </div>
+            </div>
+            <div class="levels-banner">
+                <p>أكاديمية تنسور تدعم الطلاب من <strong>جميع المستويات</strong> — من <strong>طلاب المدارس</strong>
+                    الطموحين إلى الباحثين المتقدمين.</p>
+            </div>
+    </section>
+
+    <!-- Language Learning Section -->
+    <section id="languages" class="scientific-languages">
+        <div class="section-title reveal">
+            <h2>اللغات العلمية</h2>
+            <p>إتقان اللغات الأساسية للبحث العلمي والمجلات الدولية.</p>
+        </div>
+        <div class="lang-learning-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-EN&lang=ar'">
+                <span class="lang-icon">EN</span>
+                <h4>الإنجليزية</h4>
+                <span class="lang-level">علمي وأكاديمي</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-HE&lang=ar'">
+                <span class="lang-icon">HE</span>
+                <h4>العبرية</h4>
+                <span class="lang-level">من المبتدئ إلى المتقدم</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-RU&lang=ar'">
+                <span class="lang-icon">RU</span>
+                <h4>الروسية</h4>
+                <span class="lang-level">تقني وأدبي</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-AR&lang=ar'">
+                <span class="lang-icon">AR</span>
+                <h4>العربية</h4>
+                <span class="lang-level">الفصحى الحديثة</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Languages Section -->
+    <section id="programming" class="courses-section">
+        <div class="section-title reveal">
+            <h2>لغات البرمجة</h2>
+            <p>لغات الهندسة الأساسية لتطوير البرمجيات والأنظمة.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-PY&lang=ar'">
+                <span class="lang-icon">PY</span>
+                <h4>بايثون</h4>
+                <span class="lang-level">متعددة الاستخدامات وقوية</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=ar'">
+                <span class="lang-icon">JV</span>
+                <h4>جافا</h4>
+                <span class="lang-level">مؤسسية وقوية</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-CS&lang=ar'">
+                <span class="lang-icon">C#</span>
+                <h4>C#</h4>
+                <span class="lang-level">أداء عالٍ وفعالة</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI & Data Science Section -->
+    <section id="ai-data-science" class="courses-section">
+        <div class="section-title reveal">
+            <h2>الحوسبة العلمية والذكاء الاصطناعي</h2>
+            <p>أدوات متقدمة لتحليل البيانات والنمذجة وذكاء الآلة.</p>
+        </div>
+        <div class="course-grid reveal-stagger">
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-NUMPY&lang=ar'">
+                <span class="lang-icon">NP</span>
+                <h4>NumPy</h4>
+                <span class="lang-level">حوسبة المصفوفات</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-PANDAS&lang=ar'">
+                <span class="lang-icon">PD</span>
+                <h4>Pandas</h4>
+                <span class="lang-level">معالجة البيانات</span>
+            </div>
+            <div class="lang-card" onclick="window.location.href='course.html?id=DS-CV&lang=ar'">
+                <span class="lang-icon">CV</span>
+                <h4>الرؤية الحاسوبية</h4>
+                <span class="lang-level">الذكاء البصري</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Lessons Section - Enhanced -->
+    <section id="private-lessons" class="private-lessons-section">
+        <div class="section-title reveal">
+            <h2>دروس خصوصية (1-on-1)</h2>
+            <p>تعليم مخصص مصمم لأهدافك التعليمية</p>
+        </div>
+
+        <div class="lessons-grid reveal-stagger">
+            <div class="lesson-info-card">
+                <div class="info-icon">🎯</div>
+                <h4>تعلم مخصص</h4>
+                <p>دروس مصممة خصيصاً لمستواك وأهدافك</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">🌍</div>
+                <h4>بلغتك</h4>
+                <p>تعليم بالإنجليزية، العربية، العبرية، أو الروسية</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">⏰</div>
+                <h4>جدول مرن</h4>
+                <p>احجز الجلسات في الأوقات المناسبة لك</p>
+            </div>
+            <div class="lesson-info-card">
+                <div class="info-icon">💡</div>
+                <h4>معلمون خبراء</h4>
+                <p>تعلم من علماء رياضيات ومعلمين ذوي خبرة</p>
+            </div>
+        </div>
+
+        <div class="lessons-subjects">
+            <h3 style="text-align: center; color: var(--gold-primary); margin-bottom: 30px;">المواد المتاحة</h3>
+            <div class="subjects-grid">
+                <div class="subject-badge">📐 التفاضل والتكامل</div>
+                <div class="subject-badge">🔢 الجبر الخطي</div>
+                <div class="subject-badge">📊 الجبر المجرد</div>
+                <div class="subject-badge">∞ التحليل الوظيفي</div>
+                <div class="subject-badge">🔗 الطوبولوجيا</div>
+                <div class="subject-badge">📏 الهندسة</div>
+                <div class="subject-badge">🐍 بايثون</div>
+                <div class="subject-badge">⚛️ الفيزياء</div>
+            </div>
+        </div>
+
+        <div class="lesson-pricing">
+            <div class="pricing-card">
+                <div class="pricing-duration">ساعة واحدة</div>
+                <div class="pricing-amount">120₪</div>
+                <div class="pricing-desc">مثالي للمواضيع المركزة</div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-badge">الأكثر شعبية</div>
+                <div class="pricing-duration">ساعة ونصف</div>
+                <div class="pricing-amount">165₪</div>
+                <div class="pricing-desc">مثالي للتعلم الشامل</div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-duration">ساعتان</div>
+                <div class="pricing-amount">200₪</div>
+                <div class="pricing-desc">غوص عميق في المواضيع المعقدة</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="book-lesson.html" class="btn-gold" style="font-size: 1.1rem; padding: 18px 50px;">
+                📚 احجز درسك الخاص الآن
+            </a>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics">
+        <div class="section-title reveal">
+            <h2>الأقسام الأكاديمية</h2>
+            <p>من النظرية التأسيسية إلى نمذجة الأنظمة المعقدة.</p>
+        </div>
+
+        <div class="card-grid reveal-stagger">
+            <div class="glass-card">
+                <h3>الرياضيات البحتة</h3>
+                <p>الجبر، التحليل، الطوبولوجيا، ونظرية الأعداد. السعي وراء الجمال والمنطق في أنقى صوره.</p>
+            </div>
+            <div class="glass-card">
+                <h3>الرياضيات التطبيقية</h3>
+                <p>المعادلات التفاضلية، التحسين، وديناميات الموائع. حل مشاكل العالم الحقيقي للغد.</p>
+            </div>
+            <div class="glass-card">
+                <h3>العلوم الحاسوبية</h3>
+                <p>حيث يلتقي الكود بالتفاضل والتكامل. تصميم الخوارزميات، التشفير، وأسس الذكاء الاصطناعي.</p>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    </section>
+
+    </section>
+
+    <!-- Careers / Join Faculty Section -->
+    <section id="careers" class="careers-section">
+        <div class="careers-card">
+            <div class="careers-content">
+                <h2>انضم إلى هيئة التدريس</h2>
+                <p>هل أنت معلم صاحب رؤية؟ ساعدنا في تشكيل مستقبل الرياضيات. نحن نبحث عن محاضرين وباحثين من الطراز
+                    العالمي لإلهام الجيل القادم في أكاديمية تنسور.</p>
+                <a href="#" class="btn-gold">قدم طلب للتدريس</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="support" class="donation-section">
+        <div class="section-title">
+            <h2>ادعم رؤيتنا</h2>
+            <p>مساهمتك تغذي الجيل القادم من الاكتشافات الرياضية.</p>
+        </div>
+
+        <div class="payment-viewport">
+            <!-- 3D Card Scene -->
+            <div class="card-scene" onclick="this.querySelector('.card-object').classList.toggle('is-flipped')">
+                <div class="card-object" id="card-3d">
+                    <!-- Front -->
+                    <div class="card-face face-front">
+                        <div class="card-logo-display">∇ TENSOR</div>
+                        <div class="card-chip"></div>
+                        <div class="card-number-display" id="display-number">#### #### #### ####</div>
+                        <div class="card-details-row">
+                            <div class="detail-group">
+                                <span class="detail-label">حامل البطاقة</span>
+                                <span class="detail-value" id="display-name">الاسم الكامل</span>
+                            </div>
+                            <div class="detail-group">
+                                <span class="detail-label">تاريخ الانتهاء</span>
+                                <span class="detail-value" id="display-date">MM/YY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back -->
+                    <div class="card-face face-back">
+                        <div class="magnetic-strip"></div>
+                        <div class="cvv-strip" id="display-cvv">***</div>
+                        <div class="cvv-label">CVV</div>
+                        <div class="card-back-logo">TENSOR</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Form -->
+            <div class="payment-form">
+                <div class="form-group">
+                    <label>رقم البطاقة</label>
+                    <input type="text" class="payment-input" id="input-number" placeholder="xxxx xxxx xxxx xxxx"
+                        maxlength="19">
+                </div>
+                <div class="form-group">
+                    <label>اسم حامل البطاقة</label>
+                    <input type="text" class="payment-input" id="input-name" placeholder="الاسم كما يظهر على البطاقة">
+                </div>
+                <div class="form-row-split">
+                    <div class="form-group" style="flex: 2;">
+                        <label>تاريخ الانتهاء</label>
+                        <input type="text" class="payment-input" id="input-date" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>CVV</label>
+                        <input type="text" class="payment-input" id="input-cvv" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                <button class="btn-submit" style="margin-top: 20px;">دفع آمن</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="bit-wrapper">
+            <h4 style="margin-bottom: 10px; color: #fff;">دفع سريع عبر Bit</h4>
+            <div style="margin-bottom: 15px;">
+                <label
+                    style="color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <input type="checkbox" id="bit-recurring" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>تبرع شهري</span>
+                </label>
+            </div>
+            <button class="bit-btn">
+                <span>ادفع عبر BIT</span>
+                <span style="font-size: 1.2em;">⚡</span>
+            </button>
+        </div>
+
+        <div class="donation-grid">
+            <button class="donate-amount-btn active">₪50</button>
+            <button class="donate-amount-btn">₪200</button>
+            <button class="donate-amount-btn">₪500</button>
+            <button class="donate-amount-btn">₪1000</button>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-logo">تنسور</div>
+        <div class="footer-links">
+            <a href="#">الأبحاث</a>
+            <a href="#">الخريجون</a>
+            <a href="#">وظائف</a>
+            <a href="#">الصحافة</a>
+        </div>
+        <div class="visitor-counter">
+            <span class="visitor-icon">👁️</span>
+            <span>إجمالي الزوار:</span>
+            <span class="visitor-number" id="visitor-count-value">0</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+            © 2026 معهد تنسور الدولي للرياضيات. جميع الحقوق محفوظة.
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Auth Modal -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="auth-modal">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+            <div class="auth-tabs">
+                <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">تسجيل الدخول</button>
+                <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">حساب جديد</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="auth-error" id="login-error">بيانات غير صحيحة</div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" class="payment-input" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" class="payment-input" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">دخول</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="auth-error" id="signup-error">خطأ في إنشاء الحساب</div>
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" class="payment-input" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" class="payment-input" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" class="payment-input" id="signup-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">إنشاء حساب</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="payment.js"></script>
+</body>
+
+</html>
