@@ -641,9 +641,16 @@ function initLanguageTitle() {
 }
 
 /* --- Language Splash Logic --- */
-function selectLanguage(lang) {
+/* --- Language Splash Logic --- */
+window.selectLanguage = function (lang) {
     localStorage.setItem('tensor_lang_seen', 'true');
     localStorage.setItem('tensor_preferred_lang', lang);
+    localStorage.setItem('tensor_region_preference', lang); // Sync with region-selector.js
+
+    // Safety: Ensure scroll is immediately enabled when user makes a choice
+    document.body.style.overflow = '';
+    document.body.classList.remove('no-scroll');
+
     const splash = document.getElementById('language-splash');
     if (splash) {
         splash.classList.add('hidden');
@@ -651,7 +658,8 @@ function selectLanguage(lang) {
             splash.style.display = 'none';
         }, 800);
     }
-}
+    return true; // Allow navigation
+};
 
 function initLanguageSplash() {
     // Check if user has already selected a language or visited before
