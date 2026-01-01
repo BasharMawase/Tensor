@@ -663,10 +663,23 @@ function initLanguageTitle() {
 
 /* --- Language Splash Logic --- */
 /* --- Language Splash Logic --- */
-window.selectLanguage = function (lang) {
+/* --- Language Splash Logic --- */
+window.selectLanguage = function (lang, event) {
     localStorage.setItem('tensor_lang_seen', 'true');
     localStorage.setItem('tensor_preferred_lang', lang);
     localStorage.setItem('tensor_region_preference', lang); // Sync with region-selector.js
+
+    // Check if we are already on the target page
+    if (event && event.currentTarget) {
+        const targetUrl = event.currentTarget.href;
+        const currentUrl = window.location.href;
+
+        // If the link just goes to the same page (e.g. index.html -> index.html),
+        // prevent default so we don't reload, just hide the splash.
+        if (targetUrl === currentUrl || targetUrl === currentUrl + '#' || (targetUrl.endsWith('/index.html') && currentUrl.endsWith('/'))) {
+            event.preventDefault();
+        }
+    }
 
     // Safety: Ensure scroll is immediately enabled when user makes a choice
     document.body.style.overflow = '';
@@ -680,7 +693,7 @@ window.selectLanguage = function (lang) {
             splash.style.display = 'none';
         }, 800);
     }
-    return true; // Allow navigation
+    return true; // Allow navigation if not prevented
 };
 
 function initLanguageSplash() {
