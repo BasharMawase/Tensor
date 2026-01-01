@@ -537,6 +537,17 @@
                 </div>
                 <button type="submit" class="btn-submit" style="width: 100%; margin-top: 20px;">Create Account</button>
             </form>
+
+            <!-- Success View (Hidden by Default) -->
+            <div id="auth-success-view" class="auth-success-view" style="display: none; text-align: center;">
+                <div class="success-icon-large">✨</div>
+                <h3 style="color: var(--gold-primary); margin: 20px 0;">Check your inbox!</h3>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">
+                    We've sent a verification link to <span id="success-email-display"
+                        style="color: white; font-weight: bold;"></span>.
+                </p>
+                <button class="btn-gold" style="width: 100%;" onclick="closeAuthModal()">I verified it</button>
+            </div>
         </div>
     </div>
 
@@ -881,11 +892,8 @@
     </script>
 
 
-</body>
-
-</html>
-
-<script src="region-selector.js"></script>
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
 </body>
 
 </html>

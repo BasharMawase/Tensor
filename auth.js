@@ -90,10 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 const data = await res.json();
                 if (res.ok) {
-                    // Start Verification Flow
-                    alert(`✅ Account created successfully!\n\nWe have sent a verification link to ${email}.\n\n(Since this is a demo, check the server console for the link)`);
-                    closeAuthModal();
-                    // Do not auto-login
+                    // Success View
+                    document.getElementById('signup-form').style.display = 'none';
+                    document.getElementById('auth-success-view').style.display = 'block';
+                    document.getElementById('success-email-display').textContent = email;
+
+                    // Trigger "Email" Simulation
+                    if (data.verificationToken) {
+                        simulateEmailToast(email, data.verificationToken, {
+                            id: data.id,
+                            name: name,
+                            email: email,
+                            type: 'student'
+                        });
+                    }
                 } else {
                     showAuthError('signup', data.message);
                 }
@@ -103,6 +113,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/* --- Email Simulation --- */
+function simulateEmailToast(email, token, userObj) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    setTimeout(() => {
+        // Create Toast Element
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = `
+            <div class="toast-icon">📧</div>
+            <div class="toast-content">
+                <h4>Tensor Academy</h4>
+                <p>Verify your email address to access your account.</p>
+                <span class="toast-time">Just now</span>
+            </div>
+        `;
+
+        // Click Handler (Simulate opening email link)
+        toast.addEventListener('click', async () => {
+            // Visual feedback
+            toast.style.transform = 'scale(0.98)';
+
+            try {
+                // Call verification endpoint
+                const res = await fetch(`/api/auth/verify?token=${token}`);
+
+                if (res.ok || res.status === 302 || res.redirected) {
+                    // Success!
+                    toast.classList.remove('active');
+                    setTimeout(() => toast.remove(), 500);
+
+                    // Auto-login
+                    userObj.is_verified = 1;
+                    login(userObj);
+
+                    // Show small welcome alert or just let the login refresh do its job
+                    // (Login refreshes page, so no extra UI needed here)
+                }
+            } catch (e) {
+                console.error("Verification failed", e);
+            }
+        });
+
+        container.appendChild(toast);
+
+        // Animate In
+        requestAnimationFrame(() => {
+            toast.classList.add('active');
+        });
+
+        // Play sound? (Optional, maybe too intrusive)
+
+    }, 2500); // 2.5s delay to feel like "email arriving"
+}
 
 function openAuthModal() {
     document.getElementById('modal-overlay').classList.add('active');

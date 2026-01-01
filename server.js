@@ -111,6 +111,7 @@ app.post('/api/auth/signup', async (req, res) => {
             id: result.id,
             name,
             email,
+            verificationToken, // Exposed for frontend demo simulation
             message: 'Signup successful! Please check your server console for the verification link.'
         });
     } catch (e) {
@@ -235,7 +236,7 @@ app.get('/', (req, res) => {
 // Get All Courses
 app.get('/api/courses', async (req, res) => {
     try {
-        const rows = await db.all("SELECT id, data, videos FROM courses");
+        const rows = await db.all("SELECT id, data FROM courses");
         const courses = {};
         rows.forEach(row => {
             const data = JSON.parse(row.data);
