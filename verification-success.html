@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verified | Tensor Academy</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: var(--bg-primary);
+        }
+
+        .success-card {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-card">
+        <div class="icon">✓</div>
+        <h1>Email Verified!</h1>
+        <p>Your account has been successfully verified.</p>
+        <br>
+        <p>Redirecting to login...</p>
+    </div>
+    <script>
+        setTimeout(() => {
+            window.location.href = '/index.html#login';
+        }, 3000);
+    </script>
+</body>
+
+</html>

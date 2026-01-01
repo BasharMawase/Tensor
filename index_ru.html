@@ -15,6 +15,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5377405598588154"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -253,22 +257,24 @@
     <!-- Programming Languages Section -->
     <section id="programming" class="courses-section">
         <div class="section-title reveal">
-            <h2>Языки Программирования</h2>
+            <div class="typing-title-container">
+                <h2 class="typing-title">Языки Программирования</h2>
+            </div>
             <p>Основные инженерные языки для разработки программного обеспечения и систем.</p>
         </div>
         <div class="course-grid reveal-stagger">
-            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-PY&lang=ru'">
-                <span class="lang-icon">PY</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=PROG-PY&lang=ru'">
+                <span class="lang-icon">def main():</span>
                 <h4>Python</h4>
                 <span class="lang-level">Универсальный и Мощный</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=ru'">
-                <span class="lang-icon">JV</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=ru'">
+                <span class="lang-icon">class App {</span>
                 <h4>Java</h4>
                 <span class="lang-level">Корпоративный и Надежный</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-CS&lang=ru'">
-                <span class="lang-icon">C#</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=PROG-CS&lang=ru'">
+                <span class="lang-icon">Console.Log</span>
                 <h4>C#</h4>
                 <span class="lang-level">Высокопроизводительный</span>
             </div>
@@ -537,9 +543,12 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="math-animation.js"></script>
+    <script src="section-animations.js"></script>
     <script src="auth.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="payment.js"></script>
+    <script src="region-selector.js"></script>
 </body>
 
 </html>

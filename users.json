@@ -1,20 +1,11 @@
 [
   {
-    "id": 1766757045996,
-    "name": "Test User",
-    "email": "test@tensor.com",
-    "password": "$2b$10$JG44pf8ZfTvI8MEqZUMITea7gUscOlioFwxm38DZpqwXwnYT7wfAu"
-  },
-  {
-    "id": 1766757085889,
-    "name": "Bashar Mawase",
-    "email": "basharmawaseru@gmail.com",
-    "password": "$2b$10$/86A0ImgkLtvQiuZ6.7/1ucQ83g/oj7Nd2SUGKFZpuQQAPHBHG1oa"
-  },
-  {
-    "id": 1766830898147,
-    "name": "Bashar",
-    "email": "basharinimawasini@gmail.com",
-    "password": "$2b$10$jUTdug9qCQMxMMklrllo2ecqSAsojebJ2k4kaZkWpm..Z29xI4rNS"
+    "id": 1767130333682,
+    "name": "tensor",
+    "email": "tensor@gmail.com",
+    "type": "student",
+    "notes": "",
+    "created": "2025-12-30T21:32:13.682Z",
+    "password": "$2b$10$ij./JsjUr4Hqw56v3wFwUusCad26sOI/6GRS8XowlFGkds0Uq/9Ci"
   }
 ]

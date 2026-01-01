@@ -1,0 +1,442 @@
+{
+  "MTH-101": {
+    "id": "MTH-101",
+    "en": {
+      "title": "Calculus & Analysis",
+      "description": "A rigorous introduction to limits, derivatives, integrals, and infinite series. This course builds the mathematical foundation required for advanced physics and engineering.",
+      "syllabus": [
+        "Limits and Continuity",
+        "Differentiation: Theory and Applications",
+        "Integration: Riemann Sums and Techniques",
+        "Sequences and Series",
+        "Introduction to Differential Equations"
+      ],
+      "duration": "12 Weeks",
+      "level": "Foundational"
+    },
+    "ar": {
+      "title": "التفاضل والتكامل والتحليل",
+      "description": "مقدمة دقيقة للنهايات، المشتقات، التكاملات، والمتسلسلات اللا نهائية. يبني هذا المساق الأساس الرياضي المطلوب للفيزياء والهندسة المتقدمة.",
+      "syllabus": [
+        "النهايات والاتصال",
+        "التفاضل: النظرية والتطبيقات",
+        "التكامل: مجاميع ريمان والتقنيات",
+        "المتتاليات والمتسلسلات",
+        "مقدمة في المعادلات التفاضلية"
+      ],
+      "duration": "١٢ أسبوع",
+      "level": "تأسيسي"
+    },
+    "he": {
+      "title": "חשבון אינפיניטסימלי",
+      "description": "מבוא קפדני לגבולות, נגזרות, אינטגרלים וטורים אינסופיים. קורס זה בונה את היסוד המתמטי הדרוש לפיזיקה מתקדמת והנדסה.",
+      "syllabus": [
+        "גבולות ורציפות",
+        "חשבון דיפרנציאלי: תיאוריה ויישומים",
+        "אינטגרלים: סכומי רימן ושיטות אינטגרציה",
+        "סדרות וטורים",
+        "מבוא למוואות דיפרנציאליות"
+      ],
+      "duration": "12 שבועות",
+      "level": "יסודות"
+    },
+    "ru": {
+      "title": "Математический Анализ",
+      "description": "Строгое введение в пределы, производные, интегралы и бесконечные ряды. Этот курс создает математическую базу, необходимую для передовой физики и инженерии.",
+      "syllabus": [
+        "Пределы и Непрерывность",
+        "Дифференцирование: Теория и Приложения",
+        "Интегрирование: Суммы Римана",
+        "Последовательности и Ряды",
+        "Введение в Дифференциальные Уравнения"
+      ],
+      "duration": "12 Недель",
+      "level": "Базовый"
+    },
+    "videos": []
+  },
+  "MTH-102": {
+    "id": "MTH-102",
+    "en": {
+      "title": "Linear Algebra",
+      "description": "Vector spaces, linear transformations, matrices, and eigenvalues. The language of quantum mechanics and machine learning.",
+      "syllabus": [
+        "Systems of Linear Equations",
+        "Vector Spaces and Subspaces",
+        "Linear Transformations",
+        "Determinants and Eigenvalues",
+        "Inner Product Spaces"
+      ],
+      "duration": "10 Weeks",
+      "level": "Essential"
+    },
+    "ar": {
+      "title": "الجبر الخطي",
+      "description": "الفضاءات المتجهية، التحويلات الخطية، المصفوفات، والقيم الذاتية. لغة ميكانيكا الكم والتعلم الآلي.",
+      "syllabus": [
+        "أنظمة المعادلات الخطية",
+        "الفضاءات المتجهية والفضاءات الجزئية",
+        "التحويلات الخطية",
+        "المحددات والقيم الذاتية",
+        "فضاءات الضرب الداخلي"
+      ],
+      "duration": "١٠ أسابيع",
+      "level": "أساسي"
+    },
+    "he": {
+      "title": "אלגברה ליניארית",
+      "description": "מרחבים וקטוריים, העתקות ליניאריות, מטריצות וערכים עצמיים. השפה של מכניקת הקוונטים ולמידת מכונה.",
+      "syllabus": [
+        "מערכות משוואות ליניאריות",
+        "מרחבים וקטוריים ותתי-מרחבים",
+        "העתקות ליניאריות",
+        "דטרמיננטות וערכים עצמיים",
+        "מרחבי מכפלה פנימית"
+      ],
+      "duration": "10 שבועות",
+      "level": "חיוני"
+    },
+    "ru": {
+      "title": "Линейная Алгебра",
+      "description": "Векторные пространства, линейные преобразования, матрицы и собственные значения. Язык квантовой механики и машинного обучения.",
+      "syllabus": [
+        "Системы Линейных Уравнений",
+        "Векторные Пространства",
+        "Линейные Преобразования",
+        "Определители и Собственные Значения",
+        "Пространства Внутреннего Произведения"
+      ],
+      "duration": "10 Недель",
+      "level": "Важный"
+    },
+    "videos": []
+  },
+  "MTH-103": {
+    "id": "MTH-103",
+    "en": {
+      "title": "Discrete Mathematics",
+      "description": "Logic, set theory, combinatorics, and graph theory. The mathematical structures behind computer science.",
+      "syllabus": [
+        "Propositional and Predicate Logic",
+        "Set Theory and Functions",
+        "Induction and Recursion",
+        "Graph Theory Basics",
+        "Combinatorics and Counting"
+      ],
+      "duration": "10 Weeks",
+      "level": "Essential"
+    },
+    "ar": {
+      "title": "الرياضيات المتقطعة",
+      "description": "المنطق، نظرية المجموعات، التوافيق، ونظرية البيان. الهياكل الرياضية وراء علوم الحاسوب.",
+      "syllabus": [
+        "المنطق الافتراضي والمسند",
+        "نظرية المجموعات والدوال",
+        "الاستقراء والتكرار",
+        "أساسيات نظرية البيان",
+        "التوافيق والعد"
+      ],
+      "duration": "١٠ أسابيع",
+      "level": "أساسي"
+    },
+    "he": {
+      "title": "מתמטיקה בדידה",
+      "description": "לוגיקה, תורת הקבוצות, קומבינטוריקה ותורת הגרפים. המבנים המתמטיים שמאחורי מדעי המחשב.",
+      "syllabus": [
+        "תחשיב הפסוקים והפרדיקטים",
+        "תורת הקבוצות ופונקציות",
+        "אינדוקציה ורקורסיה",
+        "יסודות תורת הגרפים",
+        "קומבינטוריקה וספירה"
+      ],
+      "duration": "10 שבועות",
+      "level": "חיוני"
+    },
+    "ru": {
+      "title": "Дискретная Математика",
+      "description": "Логика, теория множеств, комбинаторика и теория графов. Математические структуры информатики.",
+      "syllabus": [
+        "Логика Высказываний",
+        "Теория Множеств",
+        "Индукция и Рекурсия",
+        "Основы Теории Графов",
+        "Комбинаторика"
+      ],
+      "duration": "10 Недель",
+      "level": "Важный"
+    },
+    "videos": []
+  },
+  "MTH-104": {
+    "id": "MTH-104",
+    "en": {
+      "title": "Probability Theory",
+      "description": "Quantifying uncertainty. Random variables, distributions, and limit theorems. The math of chance.",
+      "syllabus": [
+        "Probability Spaces and Axioms",
+        "Random Variables (Discrete & Continuous)",
+        "Expectation and Variance",
+        "Law of Large Numbers",
+        "Central Limit Theorem"
+      ],
+      "duration": "12 Weeks",
+      "level": "Foundational"
+    },
+    "ar": {
+      "title": "نظرية الاحتمالات",
+      "description": "قياس عدم اليقين. المتغيرات العشوائية، التوزيعات، ونظريات النهايات. رياضيات الصدفة.",
+      "syllabus": [
+        "فضاءات الاحتمال والبديهيات",
+        "المتغيرات العشوائية",
+        "التوقع والتباين",
+        "قانون الأعداد الكبيرة",
+        "نظرية النهاية المركزية"
+      ],
+      "duration": "١٢ أسبوع",
+      "level": "تأسيسي"
+    },
+    "he": {
+      "title": "תורת ההסתברות",
+      "description": "כימות אי-הודאות. משתנים מקריים, התפלגויות ומשפטי גבול. המתמטיקה של המקרה.",
+      "syllabus": [
+        "מרחבי הסתברות ואקסיומות",
+        "משתנים מקריים",
+        "תוחלת ושונות",
+        "חוק המספרים הגדולים",
+        "משפט הגבול המרכזי"
+      ],
+      "duration": "12 שבועות",
+      "level": "יסודות"
+    },
+    "ru": {
+      "title": "Теория Вероятностей",
+      "description": "Оценка неопределенности. Случайные величины, распределения и предельные теоремы. Математика шанса.",
+      "syllabus": [
+        "Вероятностные Пространства",
+        "Случайные Величины",
+        "Ожидание и Дисперсия",
+        "Закон Больших Чисел",
+        "Центральная Предельная Теорема"
+      ],
+      "duration": "12 Недель",
+      "level": "Базовый"
+    },
+    "videos": []
+  },
+  "MTH-201": {
+    "id": "MTH-201",
+    "en": {
+      "title": "Abstract Algebra",
+      "description": "Groups, Rings, and Fields. Exploring the deep structures underlying arithmetic and symmetry.",
+      "syllabus": [
+        "Group Theory and Subgroups",
+        "Cyclic Groups and Permutations",
+        "Isomorphisms and Homomorphisms",
+        "Ring Theory Basics",
+        "Introduction to Fields"
+      ],
+      "duration": "14 Weeks",
+      "level": "Advanced"
+    },
+    "ar": {
+      "title": "الجبر المجرد",
+      "description": "الزمر، الحلقات، والحقول. استكشاف الهياكل العميقة الكامنة وراء الحساب والتناظر.",
+      "syllabus": [
+        "نظرية الزمر والزمر الجزئية",
+        "الزمر الدورية والتباديل",
+        "التشابه والتشاكل",
+        "أساسيات نظرية الحلقات",
+        "مقدمة في الحقول"
+      ],
+      "duration": "١٤ أسبوع",
+      "level": "متقدم"
+    },
+    "he": {
+      "title": "אלגברה מופשטת",
+      "description": "חבורות, חוגים ושדות. חקירת המבנים העמוקים העומדים בבסיס האריתמטיקה והסימטריה.",
+      "syllabus": [
+        "תורת החבורות",
+        "חבורות ציקליות ותמורות",
+        "איזומורפיזם והומומורפיזם",
+        "תורת החוגים",
+        "מבוא לשדות"
+      ],
+      "duration": "14 שבועות",
+      "level": "מתקדם"
+    },
+    "ru": {
+      "title": "Общая Алгебра",
+      "description": "Группы, кольца и поля. Изучение глубоких структур, лежащих в основе арифметики и симметрии.",
+      "syllabus": [
+        "Теория Групп",
+        "Циклические Группы",
+        "Изоморфизмы",
+        "Теория Колец",
+        "Введение в Поля"
+      ],
+      "duration": "14 Недель",
+      "level": "Продвинутый"
+    },
+    "videos": []
+  },
+  "LANG-EN": {
+    "id": "LANG-EN",
+    "en": {
+      "title": "Scientific English",
+      "level": "Intermediate",
+      "description": "Master the global language of science.",
+      "syllabus": [],
+      "duration": "8 Weeks"
+    },
+    "ar": {
+      "title": "اللغة الإنجليزية العلمية",
+      "level": "متوسط",
+      "description": "أتقن لغة العلم العالمية.",
+      "syllabus": [],
+      "duration": "٨ أسابيع"
+    },
+    "he": {
+      "title": "אנגלית מדעית",
+      "level": "בינוני",
+      "description": "שלטו בשפה הבינלאומית של המדע.",
+      "syllabus": [],
+      "duration": "8 שבועות"
+    },
+    "ru": {
+      "title": "Научный Английский",
+      "level": "Средний",
+      "description": "Овладейте глобальным языком науки.",
+      "syllabus": [],
+      "duration": "8 Недель"
+    },
+    "videos": []
+  },
+  "LANG-AR": {
+    "id": "LANG-AR",
+    "en": {
+      "title": "Modern Arabic",
+      "level": "Beginner",
+      "description": "Learn Modern Standard Arabic.",
+      "syllabus": [],
+      "duration": "10 Weeks"
+    },
+    "ar": {
+      "title": "اللغة العربية الفصحى",
+      "level": "متقدم",
+      "description": "دراسة متعمقة للنحو والصرف.",
+      "syllabus": [],
+      "duration": "١٠ أسابيع"
+    },
+    "he": {
+      "title": "ערבית ספרותית",
+      "level": "מתחילים",
+      "description": "למדו ערבית ספרותית מודרנית.",
+      "syllabus": [],
+      "duration": "10 שבועות"
+    },
+    "ru": {
+      "title": "Современный Арабский",
+      "level": "Начальный",
+      "description": "Изучайте современный арабский.",
+      "syllabus": [],
+      "duration": "10 Недель"
+    },
+    "videos": []
+  },
+  "LANG-HE": {
+    "id": "LANG-HE",
+    "en": {
+      "title": "Hebrew Language",
+      "level": "Beginner",
+      "description": "From Aleph-Bet to advanced reading.",
+      "syllabus": [],
+      "duration": "10 Weeks"
+    },
+    "ar": {
+      "title": "اللغة العبرية",
+      "level": "مبتدئ",
+      "description": "من الألف-ب إلى القراءة.",
+      "syllabus": [],
+      "duration": "١٠ أسابيع"
+    },
+    "he": {
+      "title": "עברית אקדמית",
+      "level": "מתקדם",
+      "description": "שיפור יכולות ההבעה.",
+      "syllabus": [],
+      "duration": "10 שבועות"
+    },
+    "ru": {
+      "title": "Иврит",
+      "level": "Начальный",
+      "description": "От Алеф-Бет до чтения.",
+      "syllabus": [],
+      "duration": "10 Недель"
+    },
+    "videos": []
+  },
+  "LANG-RU": {
+    "id": "LANG-RU",
+    "en": {
+      "title": "Russian Language",
+      "level": "Beginner",
+      "description": "Unlock Russian scientific literature.",
+      "syllabus": [],
+      "duration": "12 Weeks"
+    },
+    "ar": {
+      "title": "اللغة الروسية",
+      "level": "مبتدئ",
+      "description": "تعلم الروسية للأدب العلمي.",
+      "syllabus": [],
+      "duration": "١٢ أسبوع"
+    },
+    "he": {
+      "title": "השפה הרוסית",
+      "level": "מתחילים",
+      "description": "גישה לספרות הרוסית.",
+      "syllabus": [],
+      "duration": "12 שבועות"
+    },
+    "ru": {
+      "title": "Русский Язык",
+      "level": "Продвинутый",
+      "description": "Углубленное изучение.",
+      "syllabus": [],
+      "duration": "12 Недель"
+    },
+    "videos": []
+  },
+  "LANG-PY": {
+    "id": "LANG-PY",
+    "en": {
+      "title": "Python for Science",
+      "level": "Computational",
+      "description": "Data analysis and AI.",
+      "syllabus": [],
+      "duration": "10 Weeks"
+    },
+    "ar": {
+      "title": "بايثون للعلوم",
+      "level": "حاسوبي",
+      "description": "تحليل البيانات والذكاء الاصطناعي.",
+      "syllabus": [],
+      "duration": "١٠ أسابيع"
+    },
+    "he": {
+      "title": "פייתון למדעים",
+      "level": "חישובי",
+      "description": "ניתוח נתונים ו-AI.",
+      "syllabus": [],
+      "duration": "10 שבועות"
+    },
+    "ru": {
+      "title": "Python для Науки",
+      "level": "Вычислительный",
+      "description": "Анализ данных и ИИ.",
+      "syllabus": [],
+      "duration": "10 Недель"
+    },
+    "videos": []
+  }
+}

@@ -7,6 +7,7 @@
     "studentName": "Jane Doe",
     "studentEmail": "jane@example.com",
     "studentPhone": "",
+    "studentCountryCode": "US",
     "datetime": "2026-01-01T10:00",
     "duration": 60,
     "notes": "",

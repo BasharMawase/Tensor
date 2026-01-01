@@ -15,9 +15,46 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5377405598588154"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <!-- Preloader Animation -->
+    <div id="preloader">
+        <div class="loader-content">
+            <h1 class="loader-logo">TENSOR</h1>
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Language Splash Screen (New Entry Point) -->
+    <div id="language-splash">
+        <div class="splash-content">
+            <div class="splash-logo">∇ TENSOR</div>
+            <p class="splash-subtitle">Choose your language</p>
+            <div class="splash-grid">
+                <a href="index.html" class="splash-card" onclick="selectLanguage('en')">
+                    <span class="splash-lang">English</span>
+                    <span class="splash-native">Scientific & International</span>
+                </a>
+                <a href="index_ru.html" class="splash-card" onclick="selectLanguage('ru')">
+                    <span class="splash-lang">Russian</span>
+                    <span class="splash-native">Русский</span>
+                </a>
+                <a href="index_ar.html" class="splash-card" onclick="selectLanguage('ar')">
+                    <span class="splash-lang">Arabic</span>
+                    <span class="splash-native">العربية</span>
+                </a>
+                <a href="index_he.html" class="splash-card" onclick="selectLanguage('he')">
+                    <span class="splash-lang">Hebrew</span>
+                    <span class="splash-native">עברית</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Background Layers -->
     <div class="bg-grid"></div>
@@ -157,67 +194,14 @@
             <h2>Core Curriculum</h2>
             <p>A rigorous journey through the foundations of modern mathematics.</p>
         </div>
-        <div class="course-grid reveal-stagger">
-            <div class="course-card" onclick="window.location.href='course.html?id=MTH-101&lang=en'">
-                <span class="course-number">MTH-101</span>
-                <h3>Calculus & Analysis</h3>
-                <p>Master the mathematics of change. From limits and derivatives to multivariable integration and vector
-                    fields.</p>
-                <div class="course-tags">
-                    <span class="course-tag">Essential</span>
-                    <span class="course-tag">12 Weeks</span>
-                </div>
-            </div>
-            <div class="course-card" onclick="window.location.href='course.html?id=MTH-102&lang=en'">
-                <span class="course-number">MTH-102</span>
-                <h3>Linear Algebra</h3>
-                <p>The study of vector spaces and linear mappings. The backbone of modern physics and data science.</p>
-                <div class="course-tags">
-                    <span class="course-tag">Foundational</span>
-                    <span class="course-tag">10 Weeks</span>
-                </div>
-            </div>
-            <div class="course-card" onclick="window.location.href='course.html?id=MTH-201&lang=en'">
-                <span class="course-number">MTH-201</span>
-                <h3>Abstract Algebra</h3>
-                <p>Explore algebraic structures such as groups, rings, and fields. The language of symmetry.</p>
-                <div class="course-tags">
-                    <span class="course-tag">Advanced</span>
-                    <span class="course-tag">14 Weeks</span>
-                </div>
-            </div>
-            <div class="course-card" onclick="window.location.href='course.html?id=MTH-202&lang=en'">
-                <span class="course-number">MTH-202</span>
-                <h3>Partial Diff. Equations</h3>
-                <p>Model physical phenomena including heat, sound, and fluid dynamics using differential equations.</p>
-                <div class="course-tags">
-                    <span class="course-tag">Applied</span>
-                    <span class="course-tag">12 Weeks</span>
-                </div>
-            </div>
-            <div class="course-card" onclick="window.location.href='course.html?id=MTH-103&lang=en'">
-                <span class="course-number">MTH-103</span>
-                <h3>Discrete Mathematics</h3>
-                <p>Graph theory, combinatorics, and the foundations of computer science logic. Essential for algorithms.
-                </p>
-                <div class="course-tags">
-                    <span class="course-tag">Essential</span>
-                    <span class="course-tag">10 Weeks</span>
-                </div>
-            </div>
-            <div class="course-card" onclick="window.location.href='course.html?id=MTH-104&lang=en'">
-                <span class="course-number">MTH-104</span>
-                <h3>Probability Theory</h3>
-                <p>Quantifying uncertainty. Random variables, distributions, and limit theorems. The math of chance.</p>
-                <div class="course-tags">
-                    <span class="course-tag">Foundational</span>
-                    <span class="course-tag">12 Weeks</span>
-                </div>
-            </div>
-            <div class="levels-banner">
-                <p>Tensor Academy supports students of <strong>all levels</strong> — from ambitious <strong>school
-                        students</strong> to advanced researchers.</p>
-            </div>
+        <div id="math-grid" class="course-grid reveal-stagger">
+            <!-- Dynamic Math Courses -->
+            <div style="width:100%; text-align:center; color:#888;">Loading courses...</div>
+        </div>
+        <div class="levels-banner">
+            <p>Tensor Academy supports students of <strong>all levels</strong> — from ambitious <strong>school
+                    students</strong> to advanced researchers.</p>
+        </div>
     </section>
 
     <!-- Scientific Languages Section -->
@@ -227,26 +211,33 @@
             <p>Mastering the primary languages of international research and journals.</p>
         </div>
 
-        <div class="lang-learning-grid reveal-stagger">
+        <div id="lang-grid" class="lang-learning-grid reveal-stagger">
+            <!-- Scientific English -->
             <div class="lang-card" onclick="window.location.href='course.html?id=LANG-EN&lang=en'">
-                <span class="lang-icon">EN</span>
-                <h4>English</h4>
-                <span class="lang-level">Scientific & Academic</span>
+                <span class="lang-icon">Global</span>
+                <h4>Scientific English</h4>
+                <span class="lang-level">Intermediate</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-HE&lang=en'">
-                <span class="lang-icon">HE</span>
-                <h4>Hebrew</h4>
-                <span class="lang-level">Beginner to Advanced</span>
-            </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-RU&lang=en'">
-                <span class="lang-icon">RU</span>
-                <h4>Russian</h4>
-                <span class="lang-level">Technical & Literary</span>
-            </div>
+
+            <!-- Modern Arabic -->
             <div class="lang-card" onclick="window.location.href='course.html?id=LANG-AR&lang=en'">
-                <span class="lang-icon">AR</span>
-                <h4>Arabic</h4>
-                <span class="lang-level">Modern Standard</span>
+                <span class="lang-icon">الضاد</span>
+                <h4>Modern Arabic</h4>
+                <span class="lang-level">Beginner</span>
+            </div>
+
+            <!-- Hebrew Language -->
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-HE&lang=en'">
+                <span class="lang-icon">אבג</span>
+                <h4>Hebrew Language</h4>
+                <span class="lang-level">Beginner</span>
+            </div>
+
+            <!-- Russian Language -->
+            <div class="lang-card" onclick="window.location.href='course.html?id=LANG-RU&lang=en'">
+                <span class="lang-icon">АБВ</span>
+                <h4>Russian Language</h4>
+                <span class="lang-level">Beginner</span>
             </div>
         </div>
     </section>
@@ -254,22 +245,24 @@
     <!-- Programming Languages Section -->
     <section id="programming" class="courses-section">
         <div class="section-title reveal">
-            <h2>Programming Languages</h2>
+            <div class="typing-title-container">
+                <h2 class="typing-title">Programming Languages</h2>
+            </div>
             <p>Core engineering languages for software and system development.</p>
         </div>
         <div class="course-grid reveal-stagger">
-            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-PY&lang=en'">
-                <span class="lang-icon">PY</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=PROG-PY&lang=en'">
+                <span class="lang-icon">def main():</span>
                 <h4>Python</h4>
                 <span class="lang-level">Versatile & Powerful</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=en'">
-                <span class="lang-icon">JV</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=PROG-JAVA&lang=en'">
+                <span class="lang-icon">class App {</span>
                 <h4>Java</h4>
                 <span class="lang-level">Enterprise & Robust</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=PROG-CS&lang=en'">
-                <span class="lang-icon">C#</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=PROG-CS&lang=en'">
+                <span class="lang-icon">Console.Log</span>
                 <h4>C#</h4>
                 <span class="lang-level">Performant & Efficient</span>
             </div>
@@ -283,18 +276,18 @@
             <p>Advanced tools for data analysis, modeling, and machine intelligence.</p>
         </div>
         <div class="course-grid reveal-stagger">
-            <div class="lang-card" onclick="window.location.href='course.html?id=DS-NUMPY&lang=en'">
-                <span class="lang-icon">NP</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=DS-NUMPY&lang=en'">
+                <span class="lang-icon">import numpy</span>
                 <h4>NumPy</h4>
                 <span class="lang-level">Array Computing</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=DS-PANDAS&lang=en'">
-                <span class="lang-icon">PD</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=DS-PANDAS&lang=en'">
+                <span class="lang-icon">df.head()</span>
                 <h4>Pandas</h4>
                 <span class="lang-level">Data Manipulation</span>
             </div>
-            <div class="lang-card" onclick="window.location.href='course.html?id=DS-CV&lang=en'">
-                <span class="lang-icon">CV</span>
+            <div class="lang-card coding-card" onclick="window.location.href='course.html?id=DS-CV&lang=en'">
+                <span class="lang-icon">cv2.read()</span>
                 <h4>Computer Vision</h4>
                 <span class="lang-level">Visual Intelligence</span>
             </div>
@@ -474,6 +467,19 @@
     </section>
 
 
+    <!-- adds -->
+    <div style="margin: 2rem auto; text-align: center; max-width: 100%; overflow: hidden;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5377405598588154"
+             data-ad-slot="4931346099"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <!-- Footer -->
     <footer id="contact">
         <div class="footer-logo">TENSOR</div>
@@ -496,6 +502,7 @@
     <!-- Scripts -->
     <!-- Auth Modal -->
     <div id="modal-overlay" class="modal-overlay">
+        <!-- ... (Modal content unchanged) ... -->
         <div class="auth-modal">
             <button class="modal-close" onclick="closeAuthModal()">×</button>
             <div class="auth-tabs">
@@ -537,16 +544,100 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script src="math-animation.js"></script>
+    <script src="section-animations.js"></script>
     <script src="auth.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="payment.js"></script>
 
-    <!-- Your existing code -->
-    <script src="script.js"></script>
-    <script src="auth.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="payment.js"></script>
+    <script>
+        // Dynamic Course Data Loading
+        async function loadAllCourses() {
+            try {
+                const res = await fetch('/api/courses');
+                const courses = await res.json();
+
+                // Containers
+                const mathGrid = document.getElementById('math-grid');
+                const langGrid = document.getElementById('lang-grid');
+
+                // Clear loading text
+                if (mathGrid) mathGrid.innerHTML = '';
+                if (langGrid) langGrid.innerHTML = '';
+
+                // Flag mapping
+                const flagMap = {
+                    'LANG-EN': '🇺🇸',
+                    'LANG-AR': '🇸🇦',
+                    'LANG-HE': '🇮🇱',
+                    'LANG-RU': '🇷🇺'
+                };
+
+                // Fallback icon for non-mapped
+                const getIcon = (id) => flagMap[id] || id.split('-')[1];
+
+                Object.values(courses).forEach(course => {
+                    // Extract info for current language (default en)
+                    const lang = 'en';
+                    const info = course[lang] || course['en'];
+
+                    if (!info) return;
+
+                    if (course.id.startsWith('MTH')) {
+                        // Math Course
+                        if (mathGrid) {
+                            mathGrid.innerHTML += `
+                                <div class="course-card" onclick="window.location.href='course.html?id=${course.id}&lang=${lang}'">
+                                    <span class="course-number">${course.id}</span>
+                                    <h3>${info.title}</h3>
+                                    <p>${info.description.substring(0, 100)}...</p>
+                                    <div class="course-tags">
+                                        <span class="course-tag">${info.level}</span>
+                                        <span class="course-tag">${info.duration}</span>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    } else if (course.id.startsWith('LANG') && !course.id.includes('PY')) {
+                        // Language Course (Exclude Python as it is in programming)
+                        if (langGrid) {
+                            const icon = getIcon(course.id);
+                            // Use .lang-flag class for larger emoji
+                            langGrid.innerHTML += `
+                                <div class="lang-card" onclick="window.location.href='course.html?id=${course.id}&lang=${lang}'">
+                                    <span class="lang-flag">${icon}</span>
+                                    <h4>${info.title}</h4>
+                                    <span class="lang-level">${info.level}</span>
+                                </div>
+                             `;
+                        }
+                    }
+                });
+
+                // Re-init reveal animations
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('active'));
+                }, { threshold: 0.15 });
+                document.querySelectorAll('.course-card, .lang-card').forEach(el => observer.observe(el));
+
+            } catch (e) {
+                console.error("Failed to load courses", e);
+                const mathGrid = document.getElementById('math-grid');
+                if (mathGrid) {
+                    mathGrid.innerHTML = `
+                        <div style="width:100%; text-align:center; color:#ff6b6b; padding: 20px;">
+                            <p>⚠️ Unable to load courses.</p>
+                            <p style="font-size:0.9em; opacity:0.8;">${e.message}</p>
+                        </div>
+                     `;
+                }
+            }
+        }
+
+        loadAllCourses();
+    </script>
 
     <!-- ADD THIS DATA COLLECTION SCRIPT RIGHT HERE -->
     <script>
@@ -793,10 +884,12 @@
         })();
     </script>
 
+    <script src="region-selector.js"></script>
 </body>
 
 </html>
 
+<script src="region-selector.js"></script>
 </body>
 
 </html>

@@ -90,7 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 const data = await res.json();
                 if (res.ok) {
-                    login(data);
+                    // Start Verification Flow
+                    alert(`✅ Account created successfully!\n\nWe have sent a verification link to ${email}.\n\n(Since this is a demo, check the server console for the link)`);
+                    closeAuthModal();
+                    // Do not auto-login
                 } else {
                     showAuthError('signup', data.message);
                 }

@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -12,34 +13,15 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const USERS_FILE = path.join(__dirname, 'users.json');
-const VISITORS_FILE = path.join(__dirname, 'visitors.json');
-const LESSONS_FILE = path.join(__dirname, 'lessons.json');
+const db = require('./database');
 
-// Helper to read users
-function readUsers() {
-    if (!fs.existsSync(USERS_FILE)) return [];
-    try {
-        return JSON.parse(fs.readFileSync(USERS_FILE));
-    } catch (e) {
-        return [];
-    }
-}
+// NOTE: JSON file paths removed as we are now using SQLite
+// const USERS_FILE = ...; 
+// const VISITORS_FILE = ...; // Keeping visitors file for now simpler, or we can move to DB too. Let's stick to DB.
 
-// Helper to write users
-const saveUsers = (users) => fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
 
-const readLessons = () => {
-    if (!fs.existsSync(LESSONS_FILE)) return [];
-    try {
-        const data = fs.readFileSync(LESSONS_FILE);
-        return JSON.parse(data);
-    } catch (e) {
-        return [];
-    }
-};
+// Helper functions removed. Using db directly.
 
-const saveLessons = (lessons) => fs.writeFileSync(LESSONS_FILE, JSON.stringify(lessons, null, 2));
 
 // Middleware
 app.use(cors());
@@ -49,30 +31,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve Static Files (HTML, CSS, JS, Assets)
 app.use(express.static(path.join(__dirname)));
 
-// Helper to handle visitor count
-function getVisitorCount() {
-    if (!fs.existsSync(VISITORS_FILE)) {
-        fs.writeFileSync(VISITORS_FILE, JSON.stringify({ count: 0 }));
-        return 0;
-    }
+// Visitor Count Helper using DB
+async function getVisitorCount() {
     try {
-        const data = JSON.parse(fs.readFileSync(VISITORS_FILE));
-        return data.count;
+        const row = await db.get("SELECT visitors FROM daily_stats WHERE date = DATE('now')");
+        return row ? row.visitors : 0;
     } catch (e) {
+        console.error("Visitor count error", e);
         return 0;
     }
 }
 
-function incrementVisitorCount() {
-    let count = getVisitorCount();
-    count++;
-    fs.writeFileSync(VISITORS_FILE, JSON.stringify({ count }));
-    return count;
+async function incrementVisitorCount() {
+    try {
+        const date = new Date().toISOString().split('T')[0];
+        await db.run(`INSERT INTO daily_stats (date, visitors) VALUES (?, 1) 
+                      ON CONFLICT(date) DO UPDATE SET visitors = visitors + 1`, [date]);
+        const row = await db.get("SELECT visitors FROM daily_stats WHERE date = ?", [date]);
+        return row.visitors;
+    } catch (e) {
+        console.error("Visitor increment error", e);
+        return 0;
+    }
 }
 
 // Visitor Count API
-app.get('/api/visitor-count', (req, res) => {
-    const count = incrementVisitorCount();
+app.get('/api/visitor-count', async (req, res) => {
+    const count = await incrementVisitorCount();
     res.json({ count });
 });
 
@@ -81,34 +66,100 @@ app.get('/api/visitor-count', (req, res) => {
 // Sign Up
 app.post('/api/auth/signup', async (req, res) => {
     const { name, email, password } = req.body;
-    const users = readUsers();
 
-    if (users.find(u => u.email === email)) {
-        return res.status(400).json({ message: 'User already exists' });
+    try {
+        const existing = await db.get("SELECT id FROM users WHERE email = ?", [email]);
+        if (existing) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const result = await db.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]);
+
+        res.json({ id: result.id, name, email });
+    } catch (e) {
+        res.status(500).json({ message: 'Server error' });
     }
+});
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = { id: Date.now(), name, email, password: hashedPassword };
+// Sign Up
+app.post('/api/auth/signup', async (req, res) => {
+    const { name, email, password } = req.body;
 
-    users.push(newUser);
-    saveUsers(users);
+    try {
+        const existing = await db.get("SELECT id FROM users WHERE email = ?", [email]);
+        if (existing) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
 
-    const { password: _, ...userWithoutPassword } = newUser;
-    res.json(userWithoutPassword);
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const verificationToken = crypto.randomBytes(32).toString('hex');
+
+        const result = await db.run(
+            "INSERT INTO users (name, email, password, verification_token) VALUES (?, ?, ?, ?)",
+            [name, email, hashedPassword, verificationToken]
+        );
+
+        // SIMULATE EMAIL SENDING
+        const verificationLink = `http://localhost:${PORT}/api/auth/verify?token=${verificationToken}`;
+        console.log(`\n---------------------------------------------------------`);
+        console.log(`📧 EMAIL SIMULATION: Verification for ${email}`);
+        console.log(`🔗 LINK: ${verificationLink}`);
+        console.log(`---------------------------------------------------------\n`);
+
+        res.json({
+            id: result.id,
+            name,
+            email,
+            message: 'Signup successful! Please check your server console for the verification link.'
+        });
+    } catch (e) {
+        console.error("Signup error", e);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Verify Email Endpoint
+app.get('/api/auth/verify', async (req, res) => {
+    const { token } = req.query;
+
+    try {
+        const user = await db.get("SELECT id FROM users WHERE verification_token = ?", [token]);
+
+        if (!user) {
+            return res.status(400).send("Invalid or expired verification token.");
+        }
+
+        await db.run("UPDATE users SET is_verified = 1, verification_token = NULL WHERE id = ?", [user.id]);
+
+        // Redirect to success page
+        res.redirect('/verification-success.html');
+    } catch (e) {
+        console.error("Verification error", e);
+        res.status(500).send("Server error during verification.");
+    }
 });
 
 // Login
 app.post('/api/auth/login', async (req, res) => {
     const { email, password } = req.body;
-    const users = readUsers();
-    const user = users.find(u => u.email === email);
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: 'Invalid email or password' });
+    try {
+        const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
+
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        if (user.is_verified !== 1) {
+            return res.status(401).json({ message: 'Please verify your email before logging in.' });
+        }
+
+        const { password: _, ...userWithoutPassword } = user;
+        res.json(userWithoutPassword);
+    } catch (e) {
+        res.status(500).json({ message: 'Server error' });
     }
-
-    const { password: _, ...userWithoutPassword } = user;
-    res.json(userWithoutPassword);
 });
 
 // Enrollment Endpoint
@@ -177,6 +228,93 @@ app.get('/admin', (req, res) => {
 // Default Route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// --- Course Management Routes ---
+
+// Get All Courses
+app.get('/api/courses', async (req, res) => {
+    try {
+        const rows = await db.all("SELECT id, data, videos FROM courses");
+        const courses = {};
+        rows.forEach(row => {
+            const data = JSON.parse(row.data);
+            if (row.videos) {
+                // Ensure videos are merged if they exist in the row separately (schema migration node)
+                // But our schema says videos are inside data OR separate?
+                // Actually my usage in convert_json_to_sql stored videos inside data.
+                // Wait, schema.sql says `data JSON`. 
+                // Let's assume data has everything.
+            }
+            courses[row.id] = { ...data, id: row.id };
+        });
+        res.json(courses);
+    } catch (e) {
+        console.error(e);
+        res.json({});
+    }
+});
+
+// Update/Add Course
+app.post('/api/courses', (req, res) => {
+    const { id, data } = req.body;
+    if (!id || !data) return res.status(400).json({ success: false, message: 'Missing course ID or data' });
+
+    const courses = readCourses();
+    courses[id] = { ...courses[id], ...data, id }; // Merge updates
+    saveCourses(courses);
+    res.json({ success: true, message: 'Course saved', course: courses[id] });
+});
+
+// Delete Course
+app.delete('/api/courses/:id', (req, res) => {
+    const courses = readCourses();
+    if (!courses[req.params.id]) return res.status(404).json({ success: false, message: 'Course not found' });
+
+    delete courses[req.params.id];
+    saveCourses(courses);
+    res.json({ success: true, message: 'Course deleted' });
+});
+
+// Add Video to Course
+app.post('/api/courses/:id/videos', (req, res) => {
+    const { title, url, description } = req.body;
+    const courses = readCourses();
+    const course = courses[req.params.id];
+
+    if (!course) return res.status(404).json({ success: false, message: 'Course not found' });
+    if (!course.videos) course.videos = [];
+
+    const newVideo = {
+        id: Date.now().toString(),
+        title,
+        url,
+        description: description || '',
+        addedAt: new Date().toISOString()
+    };
+
+    course.videos.push(newVideo);
+    saveCourses(courses);
+    res.json({ success: true, message: 'Video added', video: newVideo });
+});
+
+// Delete Video from Course
+app.delete('/api/courses/:courseId/videos/:videoId', (req, res) => {
+    const { courseId, videoId } = req.params;
+    const courses = readCourses();
+    const course = courses[courseId];
+
+    if (!course) return res.status(404).json({ success: false, message: 'Course not found' });
+
+    const initialLength = course.videos ? course.videos.length : 0;
+    course.videos = (course.videos || []).filter(v => v.id !== videoId);
+
+    if (course.videos.length === initialLength) {
+        return res.status(404).json({ success: false, message: 'Video not found' });
+    }
+
+    saveCourses(courses);
+    res.json({ success: true, message: 'Video removed' });
 });
 
 // Start Server
@@ -268,60 +406,151 @@ app.post('/api/book-lesson', async (req, res) => {
     } = req.body;
 
     const bookingId = 'LESSON-' + Date.now();
-    const newBooking = {
-        id: bookingId,
-        language,
-        subject,
-        customSubject,
-        studentName,
-        studentEmail,
-        studentCountryCode,
-        studentPhone,
-        duration,
-        notes,
-        userId,
-        status: 'new',
-        timestamp: new Date().toISOString()
-    };
 
-    const lessons = readLessons();
-    lessons.push(newBooking);
-    saveLessons(lessons);
+    try {
+        await db.run(
+            `INSERT INTO lessons (id, user_id, student_name, student_email, student_phone, student_country_code, subject, custom_subject, duration, notes, language, status, timestamp)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', ?)`,
+            [bookingId, userId, studentName, studentEmail, studentPhone, studentCountryCode, subject, customSubject, duration, notes, language, new Date().toISOString()]
+        );
 
-    console.log(`[Private Lesson Booked]`);
-    console.log(`  ID: ${bookingId}`);
-    console.log(`  Student: ${studentName} (${studentEmail})`);
-    console.log(`  Phone: ${studentCountryCode} ${studentPhone}`);
-    console.log(`  Subject: ${subject === 'custom' ? customSubject : subject} in ${language}`);
-    console.log(`  Duration: ${duration} minutes`);
+        console.log(`[Private Lesson Booked] ${bookingId} for ${studentName}`);
 
-    res.json({
-        success: true,
-        message: 'Lesson booked successfully!',
-        bookingId: bookingId,
-        confirmationEmail: studentEmail
-    });
+        res.json({
+            success: true,
+            message: 'Lesson booked successfully!',
+            bookingId: bookingId,
+            confirmationEmail: studentEmail
+        });
+    } catch (e) {
+        console.error("Booking error", e);
+        res.status(500).json({ success: false, message: 'Booking failed' });
+    }
 });
 
 // Admin API: Get all lessons
-app.get('/api/admin/lessons', (req, res) => {
-    // In a real app, you'd check for admin auth here
-    const lessons = readLessons();
-    res.json(lessons);
+// Admin API: Get all lessons
+app.get('/api/admin/lessons', async (req, res) => {
+    try {
+        const lessons = await db.all("SELECT * FROM lessons");
+        // Maintain JS camelCase structure if needed by frontend
+        const formatted = lessons.map(l => ({
+            id: l.id,
+            userId: l.user_id,
+            studentName: l.student_name,
+            studentEmail: l.student_email,
+            studentPhone: l.student_phone,
+            studentCountryCode: l.student_country_code,
+            subject: l.subject,
+            customSubject: l.custom_subject,
+            duration: l.duration,
+            status: l.status,
+            price: l.price,
+            datetime: l.datetime,
+            notes: l.notes,
+            language: l.language,
+            timestamp: l.created_at
+        }));
+        res.json(formatted);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json([]);
+    }
 });
 
 // Admin API: Update lesson status
-app.post('/api/admin/lessons/status', (req, res) => {
+app.post('/api/admin/lessons/status', async (req, res) => {
     const { id, status } = req.body;
-    let lessons = readLessons();
-    const lessonIndex = lessons.findIndex(l => l.id === id);
-
-    if (lessonIndex !== -1) {
-        lessons[lessonIndex].status = status;
-        saveLessons(lessons);
+    try {
+        await db.run("UPDATE lessons SET status = ? WHERE id = ?", [status, id]);
         res.json({ success: true, message: `Lesson ${id} updated to ${status}` });
-    } else {
-        res.status(404).json({ success: false, message: 'Lesson not found' });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Update failed' });
+    }
+});
+
+// Admin API: Get all users
+// Admin API: Get all users
+app.get('/api/admin/users', async (req, res) => {
+    try {
+        const users = await db.all("SELECT id, name, email, type, created_at as created, notes FROM users");
+        res.json(users);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json([]);
+    }
+});
+
+// Admin API: Create User
+app.post('/api/admin/users', async (req, res) => {
+    const { name, email, type, notes } = req.body;
+
+    try {
+        const existing = await db.get("SELECT id FROM users WHERE email = ?", [email]);
+        if (existing) {
+            return res.status(400).json({ success: false, message: 'User already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash('123456', 10);
+        const result = await db.run(
+            "INSERT INTO users (name, email, type, notes, password) VALUES (?, ?, ?, ?, ?)",
+            [name, email, type || 'student', notes || '', hashedPassword]
+        );
+
+        res.json({ success: true, user: { id: result.id, name, email, type, notes } });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ success: false, message: 'Creation failed' });
+    }
+});
+
+// Admin API: Delete all users
+app.delete('/api/admin/users', async (req, res) => {
+    try {
+        await db.run("DELETE FROM users"); // Danger!
+        res.json({ success: true, message: 'All users cleared successfully' });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Clear failed' });
+    }
+});
+
+// Admin API: Database Stats
+app.get('/api/admin/database/stats', async (req, res) => {
+    try {
+        const userCount = (await db.get("SELECT COUNT(*) as c FROM users")).c;
+        const lessonCount = (await db.get("SELECT COUNT(*) as c FROM lessons")).c;
+        const visitorCount = await getVisitorCount();
+
+        const stats = {
+            users: { count: userCount, size: 0 },
+            lessons: { count: lessonCount, size: 0 },
+            visitors: { count: visitorCount || 0, size: 0 }
+        };
+        res.json(stats);
+    } catch (e) {
+        res.json({});
+    }
+});
+
+// Admin API: Backup Database
+app.post('/api/admin/database/backup', (req, res) => {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const backupDir = path.join(__dirname, 'backups');
+    const dbPath = path.join(__dirname, 'database.db');
+
+    try {
+        if (!fs.existsSync(backupDir)) fs.mkdirSync(backupDir);
+
+        if (fs.existsSync(dbPath)) {
+            const backupPath = path.join(backupDir, `database_${timestamp}.db`);
+            fs.copyFileSync(dbPath, backupPath);
+            res.json({ success: true, message: `Successfully backed up database to ${backupPath}.` });
+        } else {
+            res.status(404).json({ success: false, message: 'Database file not found.' });
+        }
+    } catch (e) {
+        console.error('Backup error:', e);
+        res.status(500).json({ success: false, message: 'Backup failed: ' + e.message });
     }
 });
 

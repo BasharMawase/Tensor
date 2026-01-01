@@ -1,4 +1,4 @@
-const coursesData = {
+export const coursesData = {
     "MTH-101": {
         en: {
             title: "Calculus & Analysis",
@@ -393,7 +393,7 @@ const coursesData = {
         },
         ar: {
             title: "اللغة العبرية",
-            description: "من الألف-ب إلى القراءة المتقدمة. الوصول إلى النظام البيئي الأكاديمي والتكنولوجي في المنطقة.",
+            description: "من الألف-بي إلى القراءة المتقدمة. الوصول إلى النظام البيئي الأكاديمي والتكنولوجي في المنطقة.",
             syllabus: ["الأبجدية", "بناء المفردات", "تصريف الأفعال", "قراءة النصوص التقنية"],
             duration: "١٠ أسابيع",
             level: "مبتدئ"
@@ -425,7 +425,7 @@ const coursesData = {
             title: "اللغة الروسية",
             description: "افتح الباب أمام الأدبيات الرياضية والعلمية الواسعة المكتوبة باللغة الروسية.",
             syllabus: ["الأبجدية السيريلية", "قواعد النحو", "المفردات العلمية", "قراءة الأوراق الكلاسيكية"],
-            duration: "١٢ أسبوع",
+            duration: "١٢ أسابيع",
             level: "مبتدئ"
         },
         he: {
@@ -474,7 +474,3 @@ const coursesData = {
         }
     }
 };
-
-if (typeof module !== 'undefined') {
-    module.exports = coursesData;
-}

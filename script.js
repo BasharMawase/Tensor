@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initScrollReveal();
     initAnalytics();
+    initLanguageTitle();
 
     // Header Scroll Effect
     const header = document.querySelector('header');
@@ -556,4 +557,119 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('active');
         });
     });
+});
+
+/* --- Preloader Logic --- */
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const progress = document.querySelector('.loader-progress');
+
+    // Simulate progress for smooth effect
+    progress.style.width = '100%';
+
+    setTimeout(() => {
+        preloader.classList.add('loaded');
+
+        // Start main hero animations only after preloader is gone
+        setTimeout(() => {
+            if (typeof initHeroAnimation === 'function') {
+                initHeroAnimation();
+            }
+        }, 800);
+
+    }, 1000); // Wait 1s after load for effect
+});
+
+/* --- Scientific Lanugages Title Animation (Slide Effect) --- */
+function initLanguageTitle() {
+    const section = document.getElementById('languages');
+    if (!section) return;
+
+    const titleH2 = section.querySelector('h2');
+    if (!titleH2) return;
+
+    const titles = [
+        "Scientific Languages",
+        "اللغات العلمية",
+        "שפות מדעיות",
+        "Научные Языки"
+    ];
+
+    let currentIndex = 0;
+
+    // Set initial style for transition
+    titleH2.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+    titleH2.style.display = 'inline-block';
+
+    setInterval(() => {
+        // Slide Out / Fade Out
+        titleH2.style.opacity = '0';
+        titleH2.style.transform = 'translateY(-20px)';
+
+        setTimeout(() => {
+            // Update Text
+            currentIndex = (currentIndex + 1) % titles.length;
+            titleH2.textContent = titles[currentIndex];
+            titleH2.setAttribute('dir', (currentIndex === 1 || currentIndex === 2) ? 'rtl' : 'ltr');
+
+            // Reset Position for Slide In
+            titleH2.style.transition = 'none';
+            titleH2.style.transform = 'translateY(20px)';
+
+            // Force Reflow
+            void titleH2.offsetWidth;
+
+            // Slide In / Fade In
+            titleH2.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+            titleH2.style.opacity = '1';
+            titleH2.style.transform = 'translateY(0)';
+        }, 500);
+
+    }, 3500);
+}
+
+/* --- Language Splash Logic --- */
+function selectLanguage(lang) {
+    localStorage.setItem('tensor_lang_seen', 'true');
+    localStorage.setItem('tensor_preferred_lang', lang);
+    const splash = document.getElementById('language-splash');
+    if (splash) {
+        splash.classList.add('hidden');
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 800);
+    }
+}
+
+function initLanguageSplash() {
+    // Check if user has already selected a language or visited before
+    const hasSeenSplash = localStorage.getItem('tensor_lang_seen');
+    const splash = document.getElementById('language-splash');
+
+    if (hasSeenSplash === 'true') {
+        // If seen, hide immediately (or remove from DOM)
+        if (splash) splash.style.display = 'none';
+
+        // Optional: Redirect to preferred language if at root index.html?
+        // For now, we trust the user is navigating where they want.
+    } else {
+        // If not seen, ensure it is visible (CSS default is visible)
+        // Disable scroll while splash is open
+        document.body.style.overflow = 'hidden';
+
+        // Setup click listeners for splash (already in HTML onclick, but we need to re-enable scroll)
+        if (splash) {
+            const links = splash.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    }
+}
+
+// Initialize Splash on Load
+document.addEventListener('DOMContentLoaded', () => {
+    initLanguageSplash();
 });

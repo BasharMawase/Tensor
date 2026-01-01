@@ -10,6 +10,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap"
         rel="stylesheet">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5377405598588154"
+        crossorigin="anonymous"></script>
+
     <style>
         .course-header {
             padding: 120px 20px 60px;
@@ -151,7 +156,7 @@
         </section>
     </main>
 
-    <script src="courses_data.js"></script>
+
     <script>
         // Check if user is logged in
         function isUserLoggedIn() {
@@ -231,32 +236,65 @@
         };
         document.getElementById('back-link').href = backMap[lang] || 'index.html';
 
-        // Load Data
-        const course = coursesData[courseId]?.[lang];
+        // Load Data from Server
+        async function loadCourseData() {
+            try {
+                const response = await fetch('/api/courses');
+                const courses = await response.json();
+                const courseData = courses[courseId];
 
-        if (course) {
-            document.title = `${course.title} | Tensor`;
-            document.getElementById('c-code').textContent = courseId;
-            document.getElementById('c-title').textContent = course.title;
-            document.getElementById('c-desc').textContent = course.description;
-            document.getElementById('c-duration').textContent = course.duration;
-            document.getElementById('c-level').textContent = course.level;
+                if (courseData && courseData[lang]) {
+                    const content = courseData[lang];
 
-            // Syllabus
-            const list = document.getElementById('c-syllabus');
-            list.innerHTML = course.syllabus.map(item => `<li>${item}</li>`).join('');
+                    document.title = `${content.title} | Tensor`;
+                    document.getElementById('c-code').textContent = courseId;
+                    document.getElementById('c-title').textContent = content.title;
+                    document.getElementById('c-desc').textContent = content.description;
+                    document.getElementById('c-duration').textContent = content.duration;
+                    document.getElementById('c-level').textContent = content.level;
 
-            // Labels
-            const labels = {
-                en: { syllabus: "Syllabus" },
-                ar: { syllabus: "المنهاج الدراسي" },
-                he: { syllabus: "סילבוס" },
-                ru: { syllabus: "Учебный План" }
-            };
-            document.getElementById('lbl-syllabus').textContent = labels[lang].syllabus;
-        } else {
-            document.getElementById('c-title').textContent = "Course Not Found";
+                    // Syllabus
+                    const list = document.getElementById('c-syllabus');
+                    list.innerHTML = content.syllabus.map(item => `<li>${item}</li>`).join('');
+
+                    // Display Videos if available (and user has access - currently public for demo)
+                    if (courseData.videos && courseData.videos.length > 0) {
+                        const videoSection = document.createElement('section');
+                        videoSection.className = 'syllabus-section reveal';
+                        videoSection.style.marginTop = '40px';
+                        videoSection.innerHTML = `
+                            <h2 style="color: var(--gold-secondary); margin-bottom: 20px;">Course Videos</h2>
+                            <div class="video-grid" style="display: grid; gap: 1rem;">
+                                ${courseData.videos.map(v => `
+                                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border-glass);">
+                                        <h4 style="color: #fff; margin-bottom: 5px;">${v.title}</h4>
+                                        <a href="${v.url}" target="_blank" style="color: var(--gold-primary); text-decoration: none;">Watch Video →</a>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                        document.querySelector('.course-container').insertBefore(videoSection, document.getElementById('enroll-btn').parentElement);
+                    }
+
+                    // Labels
+                    const labels = {
+                        en: { syllabus: "Syllabus" },
+                        ar: { syllabus: "المنهاج الدراسي" },
+                        he: { syllabus: "סילבוס" },
+                        ru: { syllabus: "Учебный План" }
+                    };
+                    document.getElementById('lbl-syllabus').textContent = labels[lang].syllabus;
+                } else {
+                    document.getElementById('c-title').textContent = "Course Not Found";
+                    document.getElementById('c-desc').textContent = "The requested course could not be loaded.";
+                }
+            } catch (e) {
+                console.error("Failed to load course", e);
+                document.getElementById('c-title').textContent = "Error Loading Course";
+            }
         }
+
+        loadCourseData();
 
         // Scroll Reveal Logic
         function initScrollReveal() {
