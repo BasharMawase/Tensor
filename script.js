@@ -353,7 +353,10 @@ window.addEventListener('mousemove', (e) => {
 
     if (mouse.lastX !== null) {
         const dist = Math.hypot(mouse.x - mouse.lastX, mouse.y - mouse.lastY);
-        if (dist > 5 && Math.random() > 0.7) {
+        // Reduce particle spawning on mobile
+        const isMobile = window.innerWidth < 768;
+        const spawnThreshold = isMobile ? 0.9 : 0.7;
+        if (dist > 5 && Math.random() > spawnThreshold) {
             spawnMathParticle(mouse.x, mouse.y);
         }
     }
@@ -458,7 +461,9 @@ function initCanvas() {
     height = canvas.height = window.innerHeight;
 
     particles = [];
-    const count = (width < 768) ? 30 : config.particleCount;
+    // Significantly reduce particles on mobile for better performance
+    const isMobile = width < 768;
+    const count = isMobile ? 20 : (width < 1024 ? 50 : config.particleCount);
 
     for (let i = 0; i < count; i++) {
         particles.push(new Particle());
@@ -470,10 +475,26 @@ function initCanvas() {
 function resizeCanvas() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+
+    // Reinitialize with appropriate particle count on resize
+    const isMobile = width < 768;
+    const targetCount = isMobile ? 20 : (width < 1024 ? 50 : config.particleCount);
+
+    // Adjust particle count
+    while (particles.length > targetCount) {
+        particles.pop();
+    }
+    while (particles.length < targetCount) {
+        particles.push(new Particle());
+    }
 }
 
 function animate() {
     ctx.clearRect(0, 0, width, height);
+
+    // Mobile optimization: reduce connection distance
+    const isMobile = width < 768;
+    const connectionDist = isMobile ? 80 : config.connectionDistance;
 
     for (let i = 0; i < particles.length; i++) {
         particles[i].update();
@@ -484,9 +505,9 @@ function animate() {
             const dy = particles[i].y - particles[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < config.connectionDistance) {
+            if (distance < connectionDist) {
                 ctx.beginPath();
-                const opacity = 1 - (distance / config.connectionDistance);
+                const opacity = 1 - (distance / connectionDist);
                 ctx.strokeStyle = `rgba(242, 209, 132, ${opacity * 0.3})`;
                 ctx.lineWidth = 0.5;
                 ctx.moveTo(particles[i].x, particles[i].y);
@@ -500,9 +521,9 @@ function animate() {
             const dy = particles[i].y - mouse.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < config.connectionDistance) {
+            if (distance < connectionDist) {
                 ctx.beginPath();
-                ctx.strokeStyle = `rgba(242, 209, 132, ${1 - distance / config.connectionDistance})`;
+                ctx.strokeStyle = `rgba(242, 209, 132, ${1 - distance / connectionDist})`;
                 ctx.lineWidth = 0.8;
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(mouse.x, mouse.y);
@@ -511,12 +532,19 @@ function animate() {
         }
     }
 
+    // Limit math particles on mobile
+    const maxMathParticles = isMobile ? 20 : 50;
     for (let i = mathParticles.length - 1; i >= 0; i--) {
         mathParticles[i].update();
         mathParticles[i].draw();
         if (mathParticles[i].opacity <= 0) {
             mathParticles.splice(i, 1);
         }
+    }
+
+    // Limit math particle array size
+    while (mathParticles.length > maxMathParticles) {
+        mathParticles.shift();
     }
 
     requestAnimationFrame(animate);
