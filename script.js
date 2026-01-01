@@ -685,9 +685,26 @@ window.selectLanguage = function (lang, targetUrl) {
 
         // Helper to get normalized filename (e.g., 'index.html')
         const getFilename = (url) => {
-            const path = url.split('#')[0].split('?')[0];
-            const name = path.substring(path.lastIndexOf('/') + 1);
-            return (name === '' || name === 'Tensor') ? 'index.html' : name; // Handle root/folder paths as index.html
+            try {
+                const urlObj = new URL(url);
+                const pathname = urlObj.pathname;
+
+                // Extract just the filename from the path
+                const parts = pathname.split('/').filter(p => p.length > 0);
+                const lastPart = parts.length > 0 ? parts[parts.length - 1] : '';
+
+                // If it's empty, ends with /, or is just a directory name without extension, treat as index.html
+                if (!lastPart || !lastPart.includes('.')) {
+                    return 'index.html';
+                }
+
+                return lastPart;
+            } catch (e) {
+                // Fallback for invalid URLs
+                const path = url.split('#')[0].split('?')[0];
+                const name = path.substring(path.lastIndexOf('/') + 1);
+                return (!name || !name.includes('.')) ? 'index.html' : name;
+            }
         };
 
         const currentFile = getFilename(currentUrl);
@@ -696,7 +713,7 @@ window.selectLanguage = function (lang, targetUrl) {
         // If different pages, navigate!
         if (currentFile !== targetFile) {
             window.location.href = targetUrl;
-            return false; // Prevent default link click
+            return false; // Prevent default link click 
         }
         // If same page, continue to hide splash (fall through)
     }
