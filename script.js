@@ -72,6 +72,27 @@ function initAnalytics() {
     });
 }
 
+// Global Safety: Force Unlock Scroll and Hide Overlays if stalled
+(function () {
+    setTimeout(() => {
+        const splash = document.getElementById('language-splash');
+        const preloader = document.getElementById('preloader');
+
+        // If preloader is still there after 8 seconds, kill it
+        if (preloader && !preloader.classList.contains('loaded')) {
+            console.warn('Force hiding preloader due to timeout');
+            preloader.classList.add('loaded');
+            preloader.style.width = '0'; // Extra safety
+            preloader.style.height = '0';
+        }
+
+        // Ensure scroll is unlocked
+        document.body.style.overflow = '';
+        document.body.classList.remove('no-scroll');
+        document.documentElement.style.overflow = '';
+    }, 8000); // 8 seconds failsafe
+})();
+
 // --- Scroll Reveal Logic ---
 function initScrollReveal() {
     const observerOptions = {
@@ -650,6 +671,7 @@ window.selectLanguage = function (lang) {
     // Safety: Ensure scroll is immediately enabled when user makes a choice
     document.body.style.overflow = '';
     document.body.classList.remove('no-scroll');
+    document.documentElement.style.overflow = '';
 
     const splash = document.getElementById('language-splash');
     if (splash) {
@@ -673,6 +695,7 @@ function initLanguageSplash() {
         // Safety: Ensure scroll is enabled
         document.body.style.overflow = '';
         document.body.classList.remove('no-scroll');
+        document.documentElement.style.overflow = '';
 
         // Optional: Redirect to preferred language if at root index.html?
         // For now, we trust the user is navigating where they want.
