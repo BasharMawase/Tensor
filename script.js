@@ -683,16 +683,22 @@ window.selectLanguage = function (lang, targetUrl) {
     if (targetUrl) {
         const currentUrl = window.location.href;
 
-        // Strip trailing slash and hash for comparison
-        const cleanCurrent = currentUrl.replace(/\/$/, "").split('#')[0];
-        const cleanTarget = targetUrl.replace(/\/$/, "").split('#')[0];
+        // Helper to get normalized filename (e.g., 'index.html')
+        const getFilename = (url) => {
+            const path = url.split('#')[0].split('?')[0];
+            const name = path.substring(path.lastIndexOf('/') + 1);
+            return (name === '' || name === 'Tensor') ? 'index.html' : name; // Handle root/folder paths as index.html
+        };
+
+        const currentFile = getFilename(currentUrl);
+        const targetFile = getFilename(targetUrl);
 
         // If different pages, navigate!
-        if (cleanCurrent !== cleanTarget && !cleanTarget.endsWith(cleanCurrent.split('/').pop())) {
+        if (currentFile !== targetFile) {
             window.location.href = targetUrl;
             return false; // Prevent default link click
         }
-        // If same page, just fall through to hide splash
+        // If same page, continue to hide splash (fall through)
     }
 
     // Safety: Ensure scroll is immediately enabled when user makes a choice
