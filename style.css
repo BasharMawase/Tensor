@@ -2710,3 +2710,10 @@ body.force-scroll {
     margin-top: 5px;
     display: block;
 }
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
