@@ -2477,25 +2477,13 @@ footer {
 
 #programming {
     position: relative;
-    /* Animated Premium Gradient */
-    background: linear-gradient(-45deg, #050b14, #0a192f, #112240, #001f3f);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background: transparent;
+    /* Match global theme */
     overflow: hidden;
 }
 
 #programming::before {
-    /* Subtle mesh overlay instead of grid */
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.5;
-    pointer-events: none;
+    display: none;
 }
 
 @keyframes gradientBG {
@@ -2521,7 +2509,9 @@ footer {
 #programming .course-grid {
     position: relative;
     z-index: 5;
-}/* --- Language Splash Screen --- */
+}
+
+/* --- Language Splash Screen --- */
 #language-splash {
     position: fixed;
     top: 0;
@@ -2625,6 +2615,7 @@ footer {
         padding: 20px 30px;
     }
 }
+
 /* --- Nuclear Scroll Fix --- */
 .force-scroll {
     overflow: auto !important;
@@ -2633,6 +2624,7 @@ footer {
     pointer-events: auto !important;
 }
 
-html.force-scroll, body.force-scroll {
+html.force-scroll,
+body.force-scroll {
     overflow-y: auto !important;
 }
