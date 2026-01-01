@@ -2625,3 +2625,14 @@ footer {
         padding: 20px 30px;
     }
 }
+/* --- Nuclear Scroll Fix --- */
+.force-scroll {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    pointer-events: auto !important;
+}
+
+html.force-scroll, body.force-scroll {
+    overflow-y: auto !important;
+}

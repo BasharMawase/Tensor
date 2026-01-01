@@ -90,6 +90,10 @@ function initAnalytics() {
         document.body.style.overflow = '';
         document.body.classList.remove('no-scroll');
         document.documentElement.style.overflow = '';
+
+        // Nuclear Fix
+        document.body.classList.add('force-scroll');
+        document.documentElement.classList.add('force-scroll');
     }, 8000); // 8 seconds failsafe
 })();
 
@@ -665,10 +669,15 @@ function initLanguageTitle() {
 /* --- Language Splash Logic --- */
 /* --- Language Splash Logic --- */
 /* --- Language Splash Logic --- */
+/* --- Language Splash Logic --- */
 window.selectLanguage = function (lang, targetUrl) {
-    localStorage.setItem('tensor_lang_seen', 'true');
-    localStorage.setItem('tensor_preferred_lang', lang);
-    localStorage.setItem('tensor_region_preference', lang);
+    try {
+        localStorage.setItem('tensor_lang_seen', 'true');
+        localStorage.setItem('tensor_preferred_lang', lang);
+        localStorage.setItem('tensor_region_preference', lang);
+    } catch (e) {
+        console.warn('Storage failed', e);
+    }
 
     // Manual Navigation Logic
     if (targetUrl) {
@@ -691,6 +700,10 @@ window.selectLanguage = function (lang, targetUrl) {
     document.body.classList.remove('no-scroll');
     document.documentElement.style.overflow = '';
 
+    // Nuclear Fix
+    document.body.classList.add('force-scroll');
+    document.documentElement.classList.add('force-scroll');
+
     const splash = document.getElementById('language-splash');
     if (splash) {
         splash.classList.add('hidden');
@@ -704,7 +717,14 @@ window.selectLanguage = function (lang, targetUrl) {
 
 function initLanguageSplash() {
     // Check if user has already selected a language or visited before
-    const hasSeenSplash = localStorage.getItem('tensor_lang_seen');
+    let hasSeenSplash = 'false';
+    try {
+        hasSeenSplash = localStorage.getItem('tensor_lang_seen');
+    } catch (e) {
+        // If storage fails, assume observed to avoid locking user out
+        hasSeenSplash = 'true';
+    }
+
     const splash = document.getElementById('language-splash');
 
     if (hasSeenSplash === 'true') {
@@ -715,6 +735,8 @@ function initLanguageSplash() {
         document.body.style.overflow = '';
         document.body.classList.remove('no-scroll');
         document.documentElement.style.overflow = '';
+        document.body.classList.add('force-scroll');
+        document.documentElement.classList.add('force-scroll');
 
         // Optional: Redirect to preferred language if at root index.html?
         // For now, we trust the user is navigating where they want.
