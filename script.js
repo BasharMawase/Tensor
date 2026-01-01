@@ -569,6 +569,8 @@ window.addEventListener('load', () => {
 
     setTimeout(() => {
         preloader.classList.add('loaded');
+        document.body.style.overflow = ''; // Ensure scroll is enabled
+        document.body.classList.remove('no-scroll');
 
         // Start main hero animations only after preloader is gone
         setTimeout(() => {
@@ -579,6 +581,16 @@ window.addEventListener('load', () => {
 
     }, 1000); // Wait 1s after load for effect
 });
+
+// Fallback: Force hide preloader after 5 seconds if window.load hangs
+setTimeout(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader && !preloader.classList.contains('loaded')) {
+        preloader.classList.add('loaded');
+        document.body.style.overflow = '';
+        document.body.classList.remove('no-scroll');
+    }
+}, 5000);
 
 /* --- Scientific Lanugages Title Animation (Slide Effect) --- */
 function initLanguageTitle() {
@@ -649,6 +661,10 @@ function initLanguageSplash() {
     if (hasSeenSplash === 'true') {
         // If seen, hide immediately (or remove from DOM)
         if (splash) splash.style.display = 'none';
+
+        // Safety: Ensure scroll is enabled
+        document.body.style.overflow = '';
+        document.body.classList.remove('no-scroll');
 
         // Optional: Redirect to preferred language if at root index.html?
         // For now, we trust the user is navigating where they want.
