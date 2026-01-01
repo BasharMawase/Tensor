@@ -664,21 +664,26 @@ function initLanguageTitle() {
 /* --- Language Splash Logic --- */
 /* --- Language Splash Logic --- */
 /* --- Language Splash Logic --- */
-window.selectLanguage = function (lang, event) {
+/* --- Language Splash Logic --- */
+window.selectLanguage = function (lang, targetUrl) {
     localStorage.setItem('tensor_lang_seen', 'true');
     localStorage.setItem('tensor_preferred_lang', lang);
-    localStorage.setItem('tensor_region_preference', lang); // Sync with region-selector.js
+    localStorage.setItem('tensor_region_preference', lang);
 
-    // Check if we are already on the target page
-    if (event && event.currentTarget) {
-        const targetUrl = event.currentTarget.href;
+    // Manual Navigation Logic
+    if (targetUrl) {
         const currentUrl = window.location.href;
 
-        // If the link just goes to the same page (e.g. index.html -> index.html),
-        // prevent default so we don't reload, just hide the splash.
-        if (targetUrl === currentUrl || targetUrl === currentUrl + '#' || (targetUrl.endsWith('/index.html') && currentUrl.endsWith('/'))) {
-            event.preventDefault();
+        // Strip trailing slash and hash for comparison
+        const cleanCurrent = currentUrl.replace(/\/$/, "").split('#')[0];
+        const cleanTarget = targetUrl.replace(/\/$/, "").split('#')[0];
+
+        // If different pages, navigate!
+        if (cleanCurrent !== cleanTarget && !cleanTarget.endsWith(cleanCurrent.split('/').pop())) {
+            window.location.href = targetUrl;
+            return false; // Prevent default link click
         }
+        // If same page, just fall through to hide splash
     }
 
     // Safety: Ensure scroll is immediately enabled when user makes a choice
@@ -693,7 +698,8 @@ window.selectLanguage = function (lang, event) {
             splash.style.display = 'none';
         }, 800);
     }
-    return true; // Allow navigation if not prevented
+
+    return false; // Build-in preventDefault
 };
 
 function initLanguageSplash() {
