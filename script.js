@@ -645,6 +645,17 @@ setTimeout(() => {
     }
 }, 5000);
 
+// Global Auto-Unlock for English Page
+if (window.location.href.includes('index_en.html') || window.location.href.includes('index_en')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const splash = document.getElementById('language-splash');
+        if (splash) splash.style.display = 'none';
+        document.body.style.overflow = '';
+        document.body.classList.remove('no-scroll');
+    });
+}
+
+
 /* --- Scientific Lanugages Title Animation (Slide Effect) --- */
 function initLanguageTitle() {
     const section = document.getElementById('languages');
@@ -707,66 +718,51 @@ window.selectLanguage = function (lang, targetUrl) {
         console.warn('Storage failed', e);
     }
 
+    const hideSplash = () => {
+        const splash = document.getElementById('language-splash');
+        if (splash) {
+            splash.classList.add('hidden');
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 800);
+        }
+        document.body.style.overflow = '';
+        document.body.classList.remove('no-scroll');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflowY = 'auto'; // Force scroll
+    };
+
     // Manual Navigation Logic
     if (targetUrl) {
-        const currentUrl = window.location.href;
+        let currentUrl = window.location.href;
+        // Simple string check is safer than parsing sometimes
+        let isSamePage = currentUrl.split('?')[0].split('#')[0] === targetUrl.split('?')[0].split('#')[0];
 
-        // Helper to get normalized filename (e.g., 'index.html')
-        const getFilename = (url) => {
-            try {
-                const urlObj = new URL(url);
-                const pathname = urlObj.pathname;
-
-                // Extract just the filename from the path
-                const parts = pathname.split('/').filter(p => p.length > 0);
-                const lastPart = parts.length > 0 ? parts[parts.length - 1] : '';
-
-                // If it's empty, ends with /, or is just a directory name without extension, treat as index.html
-                if (!lastPart || !lastPart.includes('.')) {
-                    return 'index.html';
-                }
-
-                return lastPart;
-            } catch (e) {
-                // Fallback for invalid URLs
-                const path = url.split('#')[0].split('?')[0];
-                const name = path.substring(path.lastIndexOf('/') + 1);
-                return (!name || !name.includes('.')) ? 'index.html' : name;
-            }
-        };
-
-        const currentFile = getFilename(currentUrl);
-        const targetFile = getFilename(targetUrl);
-
-        // If different pages, navigate!
-        if (currentFile !== targetFile) {
-            window.location.href = targetUrl;
-            return false; // Prevent default link click 
+        // If strict equality fails, try fuzzy filename match
+        if (!isSamePage) {
+            const getFilename = (url) => {
+                const parts = url.split('#')[0].split('?')[0].split('/');
+                let val = parts[parts.length - 1];
+                return (!val || !val.includes('.')) ? 'index.html' : val;
+            };
+            isSamePage = getFilename(currentUrl) === getFilename(targetUrl);
         }
-        // If same page, continue to hide splash (fall through)
+
+        // If different pages, allow default link click!
+        if (!isSamePage || targetUrl.includes('index_en')) {
+            return true;
+        }
     }
 
-    // Safety: Ensure scroll is immediately enabled when user makes a choice
-    document.body.style.overflow = '';
-    document.body.classList.remove('no-scroll');
-    document.documentElement.style.overflow = '';
-
-    // Nuclear Fix
-    document.body.classList.add('force-scroll');
-    document.documentElement.classList.add('force-scroll');
-
-    const splash = document.getElementById('language-splash');
-    if (splash) {
-        splash.classList.add('hidden');
-        setTimeout(() => {
-            splash.style.display = 'none';
-        }, 800);
-    }
-
-    return false; // Build-in preventDefault
+    // If same page, just hide splash and prevent reload
+    hideSplash();
+    return false;
 };
 
 function initLanguageSplash() {
+    // SKIP SPLASH COMPLETELY ON ENGLISH PAGE
+    if (window.location.href.includes('index_en')) return;
+
     // Check if user has already selected a language or visited before
     let hasSeenSplash = 'false';
     try {
@@ -779,29 +775,41 @@ function initLanguageSplash() {
     const splash = document.getElementById('language-splash');
 
     if (hasSeenSplash === 'true') {
-        // If seen, hide immediately (or remove from DOM)
-        if (splash) splash.style.display = 'none';
+        // If seen, hide immediately
+        if (splash) {
+            splash.style.display = 'none';
+        }
 
         // Safety: Ensure scroll is enabled
-        document.body.style.overflow = '';
+        document.body.style.overflow = ''; // was 'auto'
         document.body.classList.remove('no-scroll');
         document.documentElement.style.overflow = '';
-        document.body.classList.add('force-scroll');
-        document.documentElement.classList.add('force-scroll');
 
-        // Optional: Redirect to preferred language if at root index.html?
-        // For now, we trust the user is navigating where they want.
+        // Extra force
+        document.body.style.overflowY = 'auto';
+
     } else {
-        // If not seen, ensure it is visible (CSS default is visible)
-        // Disable scroll while splash is open
+        // If not seen, ensure it is visible
         document.body.style.overflow = 'hidden';
 
-        // Setup click listeners for splash (already in HTML onclick, but we need to re-enable scroll)
+        // Setup click listeners (BACKUP for inline onclick)
         if (splash) {
             const links = splash.querySelectorAll('a');
             links.forEach(link => {
-                link.addEventListener('click', () => {
+                link.addEventListener('click', (e) => {
+                    // Force unlock immediately on click
                     document.body.style.overflow = '';
+                    document.body.classList.remove('no-scroll');
+                    document.documentElement.style.overflow = '';
+                    document.body.style.overflowY = 'auto';
+
+                    // Visually hide immediately to give feedback
+                    splash.style.transition = 'opacity 0.5s';
+                    splash.style.opacity = '0';
+                    splash.style.pointerEvents = 'none';
+
+                    // Allow the default link action (navigation) to proceed
+                    // unless prevented by selectLanguage logic
                 });
             });
         }

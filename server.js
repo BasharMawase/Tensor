@@ -231,6 +231,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Explicit English Route
+app.get('/index_en.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index_en.html'));
+});
+
 // --- Course Management Routes ---
 
 // Get All Courses

@@ -30,32 +30,8 @@
         </div>
     </div>
 
-    <!-- Language Splash Screen (New Entry Point) -->
-    <div id="language-splash">
-        <div class="splash-content">
-            <div class="splash-logo">∇ TENSOR</div>
-            <p class="splash-subtitle">Choose your language</p>
-            <div class="splash-grid">
-                <!-- Direct Link for English to bypass all logic -->
-                <a href="index_en.html" class="splash-card" onclick="localStorage.setItem('tensor_lang_seen', 'true');">
-                    <span class="splash-lang">English</span>
-                    <span class="splash-native">Scientific & International</span>
-                </a>
-                <a href="index_ru.html" class="splash-card" onclick="return selectLanguage('ru', this.href)">
-                    <span class="splash-lang">Russian</span>
-                    <span class="splash-native">Русский</span>
-                </a>
-                <a href="index_ar.html" class="splash-card" onclick="return selectLanguage('ar', this.href)">
-                    <span class="splash-lang">Arabic</span>
-                    <span class="splash-native">العربية</span>
-                </a>
-                <a href="index_he.html" class="splash-card" onclick="return selectLanguage('he', this.href)">
-                    <span class="splash-lang">Hebrew</span>
-                    <span class="splash-native">עברית</span>
-                </a>
-            </div>
-        </div>
-    </div>
+    <!-- Language Splash Screen (REMOVED: Use root index.html) -->
+    <div id="language-splash" style="display:none !important;"></div>
 
     <!-- Background Layers -->
     <div class="bg-grid"></div>
@@ -802,7 +778,6 @@
                         subject: subject,
                         duration: duration,
                         price: price,
-                        status: 'requested',
                         page: window.location.pathname
                     });
                     localStorage.setItem('tensor_lessons', JSON.stringify(lessons));
@@ -812,85 +787,35 @@
             };
 
             // Initialize
-            initStorage();
-            trackPageView();
-
-            // Set up event listeners after DOM loads
-            document.addEventListener('DOMContentLoaded', () => {
-                // Track all clicks
-                document.addEventListener('click', (e) => {
-                    const target = e.target;
-                    if (target.matches('a, button, .btn, .course-card, .lang-card, .lang-btn, .donate-amount-btn, .action-btn')) {
-                        trackClick(target);
-                    }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    initStorage();
+                    trackPageView();
                 });
+            } else {
+                initStorage();
+                trackPageView();
+            }
 
-                // Track form submissions
-                document.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    trackFormSubmit(e.target);
-
-                    // For demo - show success message
-                    alert('Form submitted! Data recorded.');
-
-                    // In real site, you would also submit to server
-                    // setTimeout(() => e.target.submit(), 100);
-                });
-
-                // Track specific payment buttons
-                document.querySelectorAll('.donate-amount-btn, .bit-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const amount = btn.textContent.match(/\$?\d+/)?.[0] || '0';
-                        const type = btn.classList.contains('bit-btn') ? 'Bit' : 'Credit Card';
-                        trackPayment(amount, type);
-                    });
-                });
-
-                // Track private lesson booking
-                document.querySelectorAll('.btn-gold').forEach(btn => {
-                    if (btn.textContent.includes('Book Your Private Lesson')) {
-                        btn.addEventListener('click', () => {
-                            trackLesson('General Math', '1 hour', '$35');
-                        });
-                    }
-                });
-
-                // Track login/signup button clicks
-                document.querySelectorAll('#nav-auth-btn, #mobile-auth-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        trackClick(btn);
-                    });
-                });
-
-                // Track all nav link clicks
-                document.querySelectorAll('.nav-item').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        trackClick(link);
-                    });
-                });
-
-                console.log('Tensor Academy data collection initialized');
+            // Global Listeners
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a, button, input[type="submit"], .course-card, .lang-card');
+                if (target) trackClick(target);
             });
 
-            // Track time on page
-            let pageLoadTime = Date.now();
-            window.addEventListener('beforeunload', () => {
-                const timeSpent = Date.now() - pageLoadTime;
-                const sessionData = JSON.parse(localStorage.getItem('tensor_session') || '{"sessions": [], "totalTime": 0}');
-                sessionData.sessions.push({
-                    timestamp: new Date().toISOString(),
-                    duration: timeSpent,
-                    page: window.location.pathname
-                });
-                sessionData.totalTime = (sessionData.totalTime || 0) + timeSpent;
-                localStorage.setItem('tensor_session', JSON.stringify(sessionData));
+            document.addEventListener('submit', (e) => {
+                trackFormSubmit(e.target);
             });
+
+            // Expose helpers if needed
+            window.tensorTrack = {
+                click: trackClick,
+                payment: trackPayment,
+                lesson: trackLesson
+            };
+
         })();
     </script>
-
-
-    <!-- Toast Container -->
-    <div id="toast-container" class="toast-container"></div>
 </body>
 
 </html>
